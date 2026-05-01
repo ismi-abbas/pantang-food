@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(251, 191, 36, 0.16), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(244, 114, 182, 0.12), transparent 24%),
+    #0c0a09;
+}
+
+.recipe-glow-amber {
+  background: linear-gradient(135deg, #fcd34d 0%, #fb923c 100%);
+}
+
+.recipe-glow-rose {
+  background: linear-gradient(135deg, #fda4af 0%, #fb7185 100%);
+}
+
+.recipe-glow-orange {
+  background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%);
+}
+
+.recipe-glow-emerald {
+  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+}
+
+.recipe-glow-sky {
+  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+}
+
+.recipe-glow-violet {
+  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+}
