@@ -1,18 +1,35 @@
 import { count, desc, eq, sql } from 'drizzle-orm'
 
-import { getDb } from '#/db'
+import { getDatabaseRuntimeMode, getDb } from '#/db'
 import { recipes as recipesTable } from '#/db/schema'
 
+import { attachCookpadMedia } from './pantang-cookpad'
 import { seededRecipes } from './recipes.seed'
 import { slugifyRecipeId } from './recipes.helpers'
 import type { CreateRecipeInput, Recipe } from './recipes.types'
 
 const runtimeUrl = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL || ''
-const useMemoryStore =
-  runtimeUrl.length === 0 ||
-  runtimeUrl.startsWith('file:') ||
-  runtimeUrl === ':memory:' ||
-  runtimeUrl.startsWith('postgres')
+const d1BindingName = process.env.CLOUDFLARE_D1_BINDING || 'DB'
+
+export function getRecipeStoreMode(databaseUrl = runtimeUrl, hasD1Binding = false) {
+  const runtimeMode = getDatabaseRuntimeMode({
+    databaseUrl,
+    d1BindingName,
+    hasD1Binding,
+  })
+
+  return runtimeMode === 'memory' ? 'memory' as const : 'database' as const
+}
+
+async function resolveRecipeStoreMode() {
+  try {
+    const mod = await import('cloudflare:workers')
+    const binding = mod.env[d1BindingName]
+    return getRecipeStoreMode(runtimeUrl, Boolean(binding && typeof binding === 'object' && 'prepare' in binding))
+  } catch {
+    return getRecipeStoreMode(runtimeUrl, false)
+  }
+}
 
 let memoryRecipes = [...seededRecipes]
 
@@ -23,6 +40,16 @@ function serializeList(value: string[]) {
 function deserializeList(value: string) {
   const parsed = JSON.parse(value)
   return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === 'string') : []
+}
+
+export function chunkRowsForInsert<T>(items: T[], chunkSize: number) {
+  const chunks: T[][] = []
+
+  for (let index = 0; index < items.length; index += chunkSize) {
+    chunks.push(items.slice(index, index + chunkSize))
+  }
+
+  return chunks
 }
 
 function toRow(recipe: Recipe) {
@@ -98,31 +125,52 @@ async function seedIfEmpty() {
     return
   }
 
-  await db.insert(recipesTable).values(seededRecipes.map(toRow))
+  for (const chunk of chunkRowsForInsert(seededRecipes.map(toRow), 6)) {
+    await db.insert(recipesTable).values(chunk)
+  }
 }
 
 export async function listRecipesFromDb() {
-  if (useMemoryStore) {
-    return [...memoryRecipes].sort((left, right) => {
+  const storeMode = await resolveRecipeStoreMode()
+
+  if (storeMode === 'memory') {
+    return attachCookpadMedia([...memoryRecipes].sort((left, right) => {
       if (left.featured !== right.featured) {
         return left.featured ? -1 : 1
       }
 
       return left.title.localeCompare(right.title)
-    })
+    }))
   }
 
   const db = await getDb()
   await seedIfEmpty()
 
   const rows = await db.select().from(recipesTable).orderBy(desc(recipesTable.featured), recipesTable.title)
-  return rows.map(fromRow)
+  return attachCookpadMedia(rows.map(fromRow))
+}
+
+export async function getRecipeByIdFromDb(recipeId: string) {
+  const storeMode = await resolveRecipeStoreMode()
+
+  if (storeMode === 'memory') {
+    const matchedRecipe = memoryRecipes.find((item) => item.id === recipeId)
+    return matchedRecipe ? attachCookpadMedia([matchedRecipe])[0] : undefined
+  }
+
+  const db = await getDb()
+  await seedIfEmpty()
+
+  const rows = await db.select().from(recipesTable).where(eq(recipesTable.id, recipeId)).limit(1)
+
+  return rows.length > 0 ? attachCookpadMedia([fromRow(rows[0])])[0] : undefined
 }
 
 export async function createRecipeInDb(input: CreateRecipeInput) {
   const baseId = slugifyRecipeId(input.title) || `recipe-${Date.now()}`
+  const storeMode = await resolveRecipeStoreMode()
 
-  if (useMemoryStore) {
+  if (storeMode === 'memory') {
     const duplicateCount = memoryRecipes.filter((recipe) => recipe.id.startsWith(baseId)).length
     const id = duplicateCount === 0 ? baseId : `${baseId}-${duplicateCount + 1}`
 

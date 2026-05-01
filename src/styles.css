@@ -1,7 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --pantang-bg: #F5EFE6;
+  --pantang-warm: #EDE3D2;
+  --pantang-deep: #E2D4BC;
+  --pantang-ink: #2B1D14;
+  --pantang-soft: #5C4636;
+  --pantang-muted: #8A7560;
+  --pantang-line: #D9CBB3;
+  --pantang-line-soft: #E8DCC4;
+  --pantang-cream: #FBF7EE;
+  --pantang-terra: #B9714A;
+  --pantang-terra-deep: #7A4A2B;
+}
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -10,34 +31,110 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+  background: var(--pantang-bg);
+}
+
 body {
   margin: 0;
+  color: var(--pantang-ink);
+  font-family: var(--font-sans);
   background:
-    radial-gradient(circle at top, rgba(251, 191, 36, 0.16), transparent 25%),
-    radial-gradient(circle at bottom right, rgba(244, 114, 182, 0.12), transparent 24%),
-    #0c0a09;
+    radial-gradient(circle at top left, rgba(185, 113, 74, 0.12), transparent 22%),
+    radial-gradient(circle at 80% 0%, rgba(140, 164, 126, 0.12), transparent 18%),
+    linear-gradient(180deg, #f5efe6 0%, #f1e8dc 100%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgba(185, 113, 74, 0.2);
+}
+
+.recipe-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), transparent 50%);
+  pointer-events: none;
 }
 
 .recipe-glow-amber {
-  background: linear-gradient(135deg, #fcd34d 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #f4d7b8 0%, #e6b37a 100%);
 }
 
 .recipe-glow-rose {
-  background: linear-gradient(135deg, #fda4af 0%, #fb7185 100%);
+  background: linear-gradient(135deg, #f2c6bf 0%, #d89f95 100%);
 }
 
 .recipe-glow-orange {
-  background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%);
+  background: linear-gradient(135deg, #f2c29a 0%, #d8925b 100%);
 }
 
 .recipe-glow-emerald {
-  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+  background: linear-gradient(135deg, #c8d9c0 0%, #97b28b 100%);
 }
 
 .recipe-glow-sky {
-  background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+  background: linear-gradient(135deg, #bfd6e4 0%, #8fb4cc 100%);
 }
 
 .recipe-glow-violet {
-  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #d2c5dc 0%, #b39cc5 100%);
+}
+
+.pantang-brand-mark {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 30%, #F4D7B8 0%, transparent 45%),
+    radial-gradient(circle at 65% 70%, #AABF98 0%, transparent 55%),
+    var(--pantang-terra);
+  box-shadow: inset 0 0 0 1px rgba(43, 29, 20, 0.15);
+}
+
+.pantang-brand-mark::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 999px;
+  border: 1px dashed rgba(43, 29, 20, 0.35);
+}
+
+.pantang-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgba(43, 29, 20, 0.06) 14px 15px);
+  background-color: rgba(255, 255, 255, 0.16);
 }

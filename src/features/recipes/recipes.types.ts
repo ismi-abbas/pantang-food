@@ -23,6 +23,10 @@ export type Recipe = {
   pantryTips: string[]
   tags: string[]
   featured: boolean
+  imageUrl?: string
+  imageAlt?: string
+  sourceName?: string
+  sourceUrl?: string
   createdAt?: string
 }
 
