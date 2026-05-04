@@ -16,7 +16,7 @@ export function PantangHeader({
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--pantang-line)] bg-[rgba(255,255,255,0.92)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-14">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-3 px-4 py-2 sm:px-6 lg:px-10">
         <Link to="/" className="flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />
           <span className="leading-tight">
@@ -59,7 +59,7 @@ export function PantangHeader({
 
 export function PantangFooter() {
   return (
-    <footer className="mx-auto mt-20 grid max-w-[1280px] gap-6 border-t border-[var(--pantang-line)] px-5 py-10 text-[var(--pantang-soft)] sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.25fr_repeat(3,1fr)] lg:px-14">
+    <footer className="mx-auto mt-12 grid max-w-[1280px] gap-4 border-t border-[var(--pantang-line)] px-4 py-8 text-[var(--pantang-soft)] sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.25fr_repeat(3,1fr)] lg:px-10">
       <div>
         <div className="mb-4 flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />

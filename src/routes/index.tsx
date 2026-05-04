@@ -114,20 +114,20 @@ function Home() {
     <div className="bg-[var(--pantang-bg)] text-[var(--pantang-ink)]">
       <PantangHeader active="home" language={language} onLanguageChange={setLanguage} />
 
-      <main id="home" className="mx-auto max-w-[1160px] px-5 pb-20 pt-8 sm:px-8 lg:px-12">
-        <section className="grid gap-6 lg:grid-cols-[1.45fr_0.85fr]">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 shadow-[0_1px_0_rgba(0,0,0,0.02)] sm:p-8">
+      <main id="home" className="mx-auto max-w-[1040px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+        <section className="grid gap-4 lg:grid-cols-[1.45fr_0.85fr]">
+          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-5 shadow-[0_1px_0_rgba(0,0,0,0.02)] sm:p-6">
             <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] font-[var(--font-mono)]">
               <span>{copy.eyebrow}</span>
               <span className="h-1 w-1 rounded-full bg-[var(--pantang-terra)]" />
               <span>Clean workspace, not a loud content feed</span>
             </div>
 
-            <h1 className="mt-5 max-w-[12ch] text-[clamp(2.9rem,6.3vw,5.4rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-[var(--pantang-ink)]">
+            <h1 className="mt-4 max-w-[12ch] text-[clamp(2.5rem,5.8vw,4.8rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-[var(--pantang-ink)]">
               Pantang recipes, arranged like a workspace.
             </h1>
 
-            <p className="mt-5 max-w-[58ch] text-[clamp(1rem,1.35vw,1.15rem)] leading-8 text-[var(--pantang-soft)]">
+            <p className="mt-4 max-w-[58ch] text-[clamp(1rem,1.35vw,1.15rem)] leading-8 text-[var(--pantang-soft)]">
               A clean bilingual archive for Malaysian mothers — browse by week, save favourites, and keep the kitchen plan close at hand.
             </p>
 
@@ -153,7 +153,7 @@ function Home() {
               </Link>
             </div>
 
-            <div className="mt-7 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2">
               <Pill>44 days</Pill>
               <Pill>Bilingual</Pill>
               <Pill>{recipes.length} recipes</Pill>
@@ -206,7 +206,7 @@ function Home() {
           </aside>
         </section>
 
-        <section id="calendar" className="mt-12 rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
+        <section id="calendar" className="mt-8 rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Plan</p>
@@ -244,8 +244,8 @@ function Home() {
           </div>
         </section>
 
-        <section id="recipes" className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
+        <section id="recipes" className="mt-8 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
+          <div className="rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Database</p>
@@ -327,8 +327,8 @@ function Home() {
           </div>
         </section>
 
-        <section className="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
+        <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]">
+          <div className="rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">References</p>

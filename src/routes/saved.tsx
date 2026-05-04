@@ -31,7 +31,7 @@ function SavedRecipesPage() {
     <div className="bg-[var(--pantang-bg)] text-[var(--pantang-ink)]">
       <PantangHeader active="saved" />
 
-      <main className="mx-auto max-w-[1160px] px-5 pb-20 pt-8 sm:px-8 lg:px-12">
+      <main className="mx-auto max-w-[1040px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)] transition hover:text-[var(--pantang-ink)]"
@@ -39,7 +39,7 @@ function SavedRecipesPage() {
           <ArrowLeft className="h-4 w-4" /> Back to home
         </Link>
 
-        <section className="mt-6 grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
+        <section className="mt-4 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
