@@ -8,6 +8,7 @@ import { Button } from '#/components/ui/button'
 import { Badge } from '#/components/ui/badge'
 import { Input } from '#/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#/components/ui/select'
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '#/components/ui/sheet'
 import { Textarea } from '#/components/ui/textarea'
 import { getPantangPrimaryCtaStyle } from '#/lib/pantang-cta'
 import { getCookpadInspirations } from '#/features/recipes/pantang-cookpad'
@@ -142,10 +143,8 @@ function Home() {
                   Open recipes <span aria-hidden="true">→</span>
                 </a>
               </Button>
-              <Button asChild variant="outline" className="h-10 rounded-full px-5 text-sm font-medium">
-                <a href="#composer">
-                  <Plus className="h-4 w-4" /> Add a recipe
-                </a>
+              <Button type="button" variant="outline" className="h-10 rounded-full px-5 text-sm font-medium" onClick={() => setShowComposer(true)}>
+                <Plus className="h-4 w-4" /> Add a recipe
               </Button>
               <Button asChild variant="secondary" className="h-10 rounded-full px-5 text-sm font-medium">
                 <Link to="/saved">Saved shelf</Link>
@@ -373,48 +372,54 @@ function Home() {
           </div>
         </section>
 
-        <section id="composer" className="mt-12 rounded-[1.75rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-5 sm:p-6">
-          <button
-            type="button"
-            onClick={() => setShowComposer((current) => !current)}
-            className="flex w-full items-center justify-between rounded-[1.3rem] border border-[var(--pantang-line)] bg-white px-5 py-4 text-left"
-          >
-            <div>
-              <p className="text-sm font-medium text-[var(--pantang-ink)]">Add family recipe</p>
-              <p className="mt-1 text-sm text-[var(--pantang-soft)]">Save a custom recipe and open it immediately on its own page.</p>
-            </div>
-            <Plus className={`h-5 w-5 text-[var(--pantang-terra)] transition ${showComposer ? 'rotate-45' : ''}`} />
-          </button>
+        <Sheet open={showComposer} onOpenChange={setShowComposer}>
+          <SheetContent side="bottom" className="mx-auto h-[88vh] max-h-[88vh] w-full rounded-t-[1.75rem] border-[var(--pantang-line)] bg-[var(--pantang-bg)] p-0 sm:max-w-3xl">
+            <SheetHeader className="border-b border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-5 py-4 sm:px-6">
+              <SheetTitle className="text-xl text-[var(--pantang-ink)]">Add family recipe</SheetTitle>
+              <SheetDescription className="text-sm text-[var(--pantang-soft)]">
+                Save a custom recipe and open it immediately on its own page.
+              </SheetDescription>
+            </SheetHeader>
 
-          {showComposer ? (
-            <form className="mt-5 grid gap-4 rounded-[1.3rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6" onSubmit={handleCreateRecipe}>
-              <TextField label="Recipe name" value={form.title} onChange={(value) => setForm((current) => ({ ...current, title: value }))} placeholder="Example: Ginger sea bass broth" />
-              <TextField label="Short summary" value={form.summary} onChange={(value) => setForm((current) => ({ ...current, summary: value }))} placeholder="Why is this good for recovery?" />
-              <div className="grid gap-4 md:grid-cols-2">
-                <SelectField label="Category" value={form.category} onChange={(value) => setForm((current) => ({ ...current, category: value as RecipeCategory }))} options={categories.filter((item): item is RecipeCategory => item !== 'All')} />
-                <SelectField label="Benefit" value={form.benefit} onChange={(value) => setForm((current) => ({ ...current, benefit: value as RecipeBenefit }))} options={benefits.filter((item): item is RecipeBenefit => item !== 'All')} />
+            <form className="flex h-[calc(88vh-5.5rem)] flex-col" onSubmit={handleCreateRecipe}>
+              <div className="flex-1 space-y-4 overflow-y-auto px-5 py-5 sm:px-6">
+                <TextField label="Recipe name" value={form.title} onChange={(value) => setForm((current) => ({ ...current, title: value }))} placeholder="Example: Ginger sea bass broth" />
+                <TextField label="Short summary" value={form.summary} onChange={(value) => setForm((current) => ({ ...current, summary: value }))} placeholder="Why is this good for recovery?" />
+                <div className="grid gap-4 md:grid-cols-2">
+                  <SelectField label="Category" value={form.category} onChange={(value) => setForm((current) => ({ ...current, category: value as RecipeCategory }))} options={categories.filter((item): item is RecipeCategory => item !== 'All')} />
+                  <SelectField label="Benefit" value={form.benefit} onChange={(value) => setForm((current) => ({ ...current, benefit: value as RecipeBenefit }))} options={benefits.filter((item): item is RecipeBenefit => item !== 'All')} />
+                </div>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <SelectField label="Week" value={form.week} onChange={(value) => setForm((current) => ({ ...current, week: value as RecipeWeek }))} options={weeks.filter((item): item is RecipeWeek => item !== 'All')} />
+                  <TextField label="Time" value={form.prepTime} onChange={(value) => setForm((current) => ({ ...current, prepTime: value }))} placeholder="25 min" />
+                  <TextField label="Serves" value={form.servings} onChange={(value) => setForm((current) => ({ ...current, servings: value }))} placeholder="2" />
+                </div>
+                <TextareaField label="Ingredients" value={form.ingredients} onChange={(value) => setForm((current) => ({ ...current, ingredients: value }))} placeholder={`300g chicken\n2 inches ginger`} rows={4} />
+                <TextareaField label="Steps" value={form.steps} onChange={(value) => setForm((current) => ({ ...current, steps: value }))} placeholder={`Saute aromatics\nAdd broth`} rows={4} />
+                <TextareaField label="Kitchen notes" value={form.pantryTips} onChange={(value) => setForm((current) => ({ ...current, pantryTips: value }))} placeholder={`Use low heat`} rows={3} />
+                <TextField label="Tags" value={form.tags} onChange={(value) => setForm((current) => ({ ...current, tags: value }))} placeholder="ginger, soup, quick" />
+                {formError ? <p className="text-sm text-red-700">{formError}</p> : null}
               </div>
-              <div className="grid gap-4 md:grid-cols-3">
-                <SelectField label="Week" value={form.week} onChange={(value) => setForm((current) => ({ ...current, week: value as RecipeWeek }))} options={weeks.filter((item): item is RecipeWeek => item !== 'All')} />
-                <TextField label="Time" value={form.prepTime} onChange={(value) => setForm((current) => ({ ...current, prepTime: value }))} placeholder="25 min" />
-                <TextField label="Serves" value={form.servings} onChange={(value) => setForm((current) => ({ ...current, servings: value }))} placeholder="2" />
-              </div>
-              <TextareaField label="Ingredients" value={form.ingredients} onChange={(value) => setForm((current) => ({ ...current, ingredients: value }))} placeholder={`300g chicken\n2 inches ginger`} rows={4} />
-              <TextareaField label="Steps" value={form.steps} onChange={(value) => setForm((current) => ({ ...current, steps: value }))} placeholder={`Saute aromatics\nAdd broth`} rows={4} />
-              <TextareaField label="Kitchen notes" value={form.pantryTips} onChange={(value) => setForm((current) => ({ ...current, pantryTips: value }))} placeholder={`Use low heat`} rows={3} />
-              <TextField label="Tags" value={form.tags} onChange={(value) => setForm((current) => ({ ...current, tags: value }))} placeholder="ginger, soup, quick" />
-              {formError ? <p className="text-sm text-red-700">{formError}</p> : null}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--pantang-ink)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--pantang-terra-deep)] disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <Sparkles className="h-4 w-4" />
-                {isSubmitting ? 'Saving...' : 'Save recipe'}
-              </button>
+
+              <SheetFooter className="border-t border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-5 py-4 sm:flex-row sm:px-6">
+                <SheetClose asChild>
+                  <Button type="button" variant="outline" className="h-10 rounded-full px-5 text-sm font-medium">
+                    Cancel
+                  </Button>
+                </SheetClose>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="h-10 rounded-full px-5 text-sm font-semibold text-white hover:bg-[var(--pantang-terra-deep)] disabled:cursor-not-allowed disabled:opacity-60"
+                  style={getPantangPrimaryCtaStyle()}
+                >
+                  <Sparkles className="h-4 w-4" />
+                  {isSubmitting ? 'Saving...' : 'Save recipe'}
+                </Button>
+              </SheetFooter>
             </form>
-          ) : null}
-        </section>
+          </SheetContent>
+        </Sheet>
       </main>
 
       <PantangFooter />
