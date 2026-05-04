@@ -3,6 +3,8 @@ import { ArrowLeft, Heart, ShoppingBasket, Sparkles } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 
 import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
+import { Button } from '#/components/ui/button'
+import { Badge } from '#/components/ui/badge'
 import { buildShoppingList, parseStoredRecipeIds, selectRecipesByIds } from '#/features/recipes/recipes.helpers'
 import { getRecipes } from '#/features/recipes/recipes.functions'
 import type { Recipe } from '#/features/recipes/recipes.types'
@@ -42,9 +44,9 @@ function SavedRecipesPage() {
         <section className="mt-4 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
+              <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
                 <Heart className="h-3.5 w-3.5" /> Saved shelf
-              </span>
+              </Badge>
               <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
                 {savedCount} recipes on this device
               </span>
@@ -56,18 +58,14 @@ function SavedRecipesPage() {
               This shelf keeps the recipes you have marked with the heart icon and turns them into a practical shopping list for the next kitchen session.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                to="/"
-                className="inline-flex items-center rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-5 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-white"
-              >
-                Browse recipes
-              </Link>
-              <a
-                href="#shopping-list"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--pantang-ink)] px-5 py-3 text-sm font-medium text-white transition hover:bg-[var(--pantang-terra-deep)]"
-              >
-                <ShoppingBasket className="h-4 w-4" /> View shopping list
-              </a>
+              <Button asChild variant="outline" className="h-10 rounded-full px-5 text-sm font-medium">
+                <Link to="/">Browse recipes</Link>
+              </Button>
+              <Button asChild className="h-10 rounded-full px-5 text-sm font-medium" style={{ backgroundColor: 'var(--pantang-ink)', color: 'white' }}>
+                <a href="#shopping-list">
+                  <ShoppingBasket className="h-4 w-4" /> View shopping list
+                </a>
+              </Button>
             </div>
           </div>
 
@@ -167,8 +165,8 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)] md:justify-end">
-        <span className="rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1">{recipe.week}</span>
-        <span className="rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1">{recipe.benefit}</span>
+        <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.week}</Badge>
+        <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.benefit}</Badge>
       </div>
     </Link>
   )

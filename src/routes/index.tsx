@@ -4,6 +4,11 @@ import { useMemo, useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 
 import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
+import { Button } from '#/components/ui/button'
+import { Badge } from '#/components/ui/badge'
+import { Input } from '#/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#/components/ui/select'
+import { Textarea } from '#/components/ui/textarea'
 import { getPantangPrimaryCtaStyle } from '#/lib/pantang-cta'
 import { getCookpadInspirations } from '#/features/recipes/pantang-cookpad'
 import type { PantangLanguage } from '#/features/recipes/pantang-design'
@@ -131,26 +136,20 @@ function Home() {
               A clean bilingual archive for Malaysian mothers — browse by week, save favourites, and keep the kitchen plan close at hand.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a
-                href="#recipes"
-                style={getPantangPrimaryCtaStyle()}
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition hover:bg-[var(--pantang-terra-deep)]"
-              >
-                Open recipes <span aria-hidden="true">→</span>
-              </a>
-              <a
-                href="#composer"
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--pantang-line)] bg-white px-5 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-warm)]"
-              >
-                <Plus className="h-4 w-4" /> Add a recipe
-              </a>
-              <Link
-                to="/saved"
-                className="inline-flex items-center rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-5 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-deep)]"
-              >
-                Saved shelf
-              </Link>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Button asChild className="h-10 rounded-full px-5 text-sm font-medium" style={getPantangPrimaryCtaStyle()}>
+                <a href="#recipes">
+                  Open recipes <span aria-hidden="true">→</span>
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="h-10 rounded-full px-5 text-sm font-medium">
+                <a href="#composer">
+                  <Plus className="h-4 w-4" /> Add a recipe
+                </a>
+              </Button>
+              <Button asChild variant="secondary" className="h-10 rounded-full px-5 text-sm font-medium">
+                <Link to="/saved">Saved shelf</Link>
+              </Button>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
@@ -454,9 +453,9 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
 
 function Pill({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--pantang-muted)]">
+    <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--pantang-muted)]">
       {children}
-    </span>
+    </Badge>
   )
 }
 
@@ -476,14 +475,16 @@ function FilterRow<T extends string>({
       <p className="mb-2 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">{label}</p>
       <div className="flex flex-wrap gap-2">
         {items.map((item) => (
-          <button
+          <Button
             key={item}
             type="button"
+            variant={activeItem === item ? 'default' : 'outline'}
+            size="sm"
             onClick={() => onPick(item)}
-            className={`rounded-full border px-3 py-2 text-sm transition ${activeItem === item ? 'border-[var(--pantang-terra)] bg-[rgba(124,58,237,0.08)] text-[var(--pantang-ink)]' : 'border-[var(--pantang-line)] bg-white text-[var(--pantang-soft)] hover:border-[var(--pantang-terra)] hover:text-[var(--pantang-ink)]'}`}
+            className={`h-8 rounded-full px-3 text-sm ${activeItem === item ? 'bg-[var(--pantang-terra)] text-white hover:bg-[var(--pantang-terra-deep)]' : 'bg-white text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)]'}`}
           >
             {item}
-          </button>
+          </Button>
         ))}
       </div>
     </div>
@@ -494,17 +495,16 @@ function SelectField({ label, value, onChange, options }: { label: string; value
   return (
     <label className="space-y-2 text-sm text-[var(--pantang-soft)]">
       <span>{label}</span>
-      <select
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-2xl border border-[var(--pantang-line)] bg-white px-4 py-3 text-[var(--pantang-ink)] outline-none transition focus:border-[var(--pantang-terra)]"
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <Select value={value} onValueChange={onChange}>
+        <SelectTrigger className="h-10 w-full rounded-2xl border-[var(--pantang-line)] bg-white px-4 text-[var(--pantang-ink)]">
+          <SelectValue placeholder={label} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option} value={option}>{option}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </label>
   )
 }
@@ -513,11 +513,11 @@ function TextField({ label, value, onChange, placeholder }: { label: string; val
   return (
     <label className="space-y-2 text-sm text-[var(--pantang-soft)]">
       <span>{label}</span>
-      <input
+      <Input
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-[var(--pantang-line)] bg-white px-4 py-3 text-[var(--pantang-ink)] outline-none transition placeholder:text-[var(--pantang-muted)] focus:border-[var(--pantang-terra)]"
+        className="h-10 rounded-2xl border-[var(--pantang-line)] bg-white px-4 text-[var(--pantang-ink)] placeholder:text-[var(--pantang-muted)]"
       />
     </label>
   )
@@ -527,12 +527,12 @@ function TextareaField({ label, value, onChange, placeholder, rows }: { label: s
   return (
     <label className="space-y-2 text-sm text-[var(--pantang-soft)]">
       <span>{label}</span>
-      <textarea
+      <Textarea
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="w-full rounded-2xl border border-[var(--pantang-line)] bg-white px-4 py-3 text-[var(--pantang-ink)] outline-none transition placeholder:text-[var(--pantang-muted)] focus:border-[var(--pantang-terra)]"
+        className="rounded-2xl border-[var(--pantang-line)] bg-white px-4 py-3 text-[var(--pantang-ink)] placeholder:text-[var(--pantang-muted)]"
       />
     </label>
   )

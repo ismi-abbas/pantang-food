@@ -1,9 +1,10 @@
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 import { ArrowLeft, Clock3, Heart, ListFilter, ShoppingBasket, UtensilsCrossed } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import type { ReactNode } from 'react'
 
 import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
+import { Button } from '#/components/ui/button'
+import { Badge } from '#/components/ui/badge'
 import { buildRecipeWisdom } from '#/features/recipes/pantang-design'
 import { buildShoppingList } from '#/features/recipes/recipes.helpers'
 import { getRecipeById, getRecipes } from '#/features/recipes/recipes.functions'
@@ -72,28 +73,29 @@ function RecipeDetailPage() {
       <PantangHeader active="detail" />
 
       <main className="mx-auto max-w-[1040px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)] transition hover:text-[var(--pantang-ink)]"
-        >
-          <ArrowLeft className="h-4 w-4" /> Back to recipes
-        </Link>
+        <Button asChild variant="ghost" className="mb-4 h-8 rounded-full px-2 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)] hover:bg-[var(--pantang-warm)] hover:text-[var(--pantang-ink)]">
+          <Link to="/">
+            <ArrowLeft className="h-4 w-4" /> Back to recipes
+          </Link>
+        </Button>
 
         <section className="mt-6 grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-4 sm:p-5">
             <div className={`overflow-hidden rounded-[1.4rem] border border-[var(--pantang-line)] bg-[var(--pantang-deep)]`}>
               <div className="flex items-center justify-between gap-4 p-4 pb-0">
-                <span className="rounded-full border border-[var(--pantang-line)] bg-white px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
+                <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-white px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
                   {recipe.week} · {recipe.category}
-                </span>
-                <button
+                </Badge>
+                <Button
                   type="button"
+                  variant="outline"
+                  size="icon-sm"
                   onClick={() => toggleFavorite(recipe.id)}
-                  className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl border transition ${isFavourite ? 'border-[var(--pantang-terra)] bg-[rgba(124,58,237,0.08)] text-[var(--pantang-terra-deep)]' : 'border-[var(--pantang-line)] bg-white text-[var(--pantang-muted)]'}`}
+                  className={`rounded-2xl border ${isFavourite ? 'border-[var(--pantang-terra)] bg-[rgba(124,58,237,0.08)] text-[var(--pantang-terra-deep)]' : 'border-[var(--pantang-line)] bg-white text-[var(--pantang-muted)]'}`}
                   aria-label="Toggle favourite"
                 >
                   <Heart className={`h-4.5 w-4.5 ${isFavourite ? 'fill-current' : ''}`} />
-                </button>
+                </Button>
               </div>
               <div className="p-4 pt-3">
                 <div className="aspect-[4/5] overflow-hidden rounded-[1.2rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)]">
@@ -120,10 +122,10 @@ function RecipeDetailPage() {
           <div className="space-y-6">
             <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
               <div className="flex flex-wrap gap-2">
-                <Tag>{recipe.category}</Tag>
-                <Tag>{recipe.week}</Tag>
+                <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.category}</Badge>
+                <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.week}</Badge>
                 {recipe.tags.map((tag) => (
-                  <Tag key={tag}>#{tag}</Tag>
+                  <Badge key={tag} variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">#{tag}</Badge>
                 ))}
               </div>
               <h1 className="mt-5 text-[clamp(2.4rem,5.3vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--pantang-ink)]">
@@ -261,13 +263,5 @@ function MetaStat({ icon, label, value }: { icon: ReactNode; label: string; valu
       </div>
       <div className="mt-2 text-2xl text-[var(--pantang-ink)]">{value}</div>
     </div>
-  )
-}
-
-function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">
-      {children}
-    </span>
   )
 }
