@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       {
         name: 'description',
         content:
-          'A bilingual pantang recipe app for Malaysian mothers, with an editorial warm-homepage design, dedicated recipe pages, installable PWA support, and Cloudflare D1-backed data.',
+          'Pantang Food is a bilingual pantang recipe app for Malaysian mothers, redesigned with an impeccable-inspired editorial visual system, dedicated recipe pages, installable PWA support, and Cloudflare D1-backed data.',
       },
       { name: 'theme-color', content: manifest.theme_color },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },

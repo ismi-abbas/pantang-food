@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap');
 @import "tailwindcss";
 
 :root {
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-serif: 'Lora', Georgia, serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --pantang-bg: #F5EFE6;
-  --pantang-warm: #EDE3D2;
-  --pantang-deep: #E2D4BC;
-  --pantang-ink: #2B1D14;
-  --pantang-soft: #5C4636;
-  --pantang-muted: #8A7560;
-  --pantang-line: #D9CBB3;
-  --pantang-line-soft: #E8DCC4;
-  --pantang-cream: #FBF7EE;
-  --pantang-terra: #B9714A;
-  --pantang-terra-deep: #7A4A2B;
+  --pantang-bg: #f5f4ed;
+  --pantang-warm: #e8e6dc;
+  --pantang-deep: #dcd8ca;
+  --pantang-ink: #141413;
+  --pantang-soft: #5e5d59;
+  --pantang-muted: #4d4c48;
+  --pantang-line: #f0eee6;
+  --pantang-line-soft: #e8e6dc;
+  --pantang-cream: #faf9f5;
+  --pantang-terra: #c96442;
+  --pantang-terra-deep: #7a4a2b;
 }
 
 * {
@@ -41,9 +41,9 @@ body {
   color: var(--pantang-ink);
   font-family: var(--font-sans);
   background:
-    radial-gradient(circle at top left, rgba(185, 113, 74, 0.12), transparent 22%),
-    radial-gradient(circle at 80% 0%, rgba(140, 164, 126, 0.12), transparent 18%),
-    linear-gradient(180deg, #f5efe6 0%, #f1e8dc 100%);
+    radial-gradient(circle at top left, rgba(201, 100, 66, 0.08), transparent 24%),
+    radial-gradient(circle at 78% 0%, rgba(162, 165, 153, 0.09), transparent 20%),
+    linear-gradient(180deg, #f5f4ed 0%, #f3f0e8 100%);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -87,27 +87,27 @@ img {
 }
 
 .recipe-glow-amber {
-  background: linear-gradient(135deg, #f4d7b8 0%, #e6b37a 100%);
+  background: linear-gradient(135deg, #f4e1c9 0%, #e9c99f 100%);
 }
 
 .recipe-glow-rose {
-  background: linear-gradient(135deg, #f2c6bf 0%, #d89f95 100%);
+  background: linear-gradient(135deg, #f1d9d3 0%, #dfb6ac 100%);
 }
 
 .recipe-glow-orange {
-  background: linear-gradient(135deg, #f2c29a 0%, #d8925b 100%);
+  background: linear-gradient(135deg, #f0d0b1 0%, #dea36c 100%);
 }
 
 .recipe-glow-emerald {
-  background: linear-gradient(135deg, #c8d9c0 0%, #97b28b 100%);
+  background: linear-gradient(135deg, #dde5d4 0%, #b9c7ac 100%);
 }
 
 .recipe-glow-sky {
-  background: linear-gradient(135deg, #bfd6e4 0%, #8fb4cc 100%);
+  background: linear-gradient(135deg, #dae2e8 0%, #bcc9d4 100%);
 }
 
 .recipe-glow-violet {
-  background: linear-gradient(135deg, #d2c5dc 0%, #b39cc5 100%);
+  background: linear-gradient(135deg, #ddd7e4 0%, #c3b6cf 100%);
 }
 
 .pantang-brand-mark {

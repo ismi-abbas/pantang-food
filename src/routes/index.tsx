@@ -3,6 +3,7 @@ import { Clock3, Flame, Plus, Search, Sparkles, Stars } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
+import { getPantangPrimaryCtaStyle } from '#/lib/pantang-cta'
 import { getCookpadInspirations } from '#/features/recipes/pantang-cookpad'
 import type { PantangLanguage } from '#/features/recipes/pantang-design'
 import {
@@ -132,7 +133,11 @@ function Home() {
               {copy.lede}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#recipes" className="inline-flex items-center gap-2 rounded-full bg-[var(--pantang-ink)] px-6 py-3 text-sm font-medium text-[var(--pantang-cream)] transition hover:bg-[var(--pantang-terra-deep)]">
+              <a
+                href="#recipes"
+                style={getPantangPrimaryCtaStyle()}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition hover:bg-[var(--pantang-terra-deep)]"
+              >
                 {copy.ctaPrimary} <span aria-hidden="true">→</span>
               </a>
               <a href="#calendar" className="inline-flex items-center rounded-full border border-[var(--pantang-line)] px-6 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-warm)]">

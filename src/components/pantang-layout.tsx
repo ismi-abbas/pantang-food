@@ -12,40 +12,40 @@ export function PantangHeader({
   onLanguageChange?: (language: PantangLanguage) => void
 }) {
   const linkClass = (isActive: boolean) =>
-    `rounded-full px-4 py-2 text-sm transition ${isActive ? 'bg-[#2B1D14] text-[#FBF7EE]' : 'text-[#5C4636] hover:bg-[#EDE3D2] hover:text-[#2B1D14]'}`
+    `rounded-full px-4 py-2 text-sm transition ${isActive ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)] shadow-[0_0_0_1px_rgba(20,20,19,0.05)]' : 'text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)] hover:text-[var(--pantang-ink)]'}`
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#E8DCC4] bg-[rgba(245,239,230,0.88)] backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1280px] items-center gap-6 px-5 py-4 sm:px-8 lg:px-14">
+    <header className="sticky top-0 z-40 border-b border-[var(--pantang-line)] bg-[rgba(245,244,237,0.9)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-5 px-5 py-4 sm:px-8 lg:px-14">
         <Link to="/" className="flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />
-          <span>
-            <span className="block font-[var(--font-serif)] text-xl font-semibold tracking-[-0.01em] text-[#2B1D14]">Pantang</span>
-            <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[#8A7560]">Confinement Kitchen · KL</span>
+          <span className="leading-tight">
+            <span className="block font-[var(--font-serif)] text-xl font-semibold tracking-[-0.01em] text-[var(--pantang-ink)]">Pantang</span>
+            <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--pantang-muted)]">Editorial confinement kitchen</span>
           </span>
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 md:flex">
           <a href="/#home" className={linkClass(active === 'home')}>Home</a>
           <a href="/#recipes" className={linkClass(active === 'recipes' || active === 'detail')}>Recipes</a>
-          <a href="/#calendar" className={linkClass(false)}>Meal Plan</a>
-          <a href="/#pantry" className={linkClass(false)}>Herbs & Tonics</a>
-          <a href="/#stories" className={linkClass(false)}>About</a>
+          <a href="/#calendar" className={linkClass(false)}>Plan</a>
+          <a href="/#pantry" className={linkClass(false)}>Pantry</a>
+          <a href="/#stories" className={linkClass(false)}>Stories</a>
         </nav>
 
         {language && onLanguageChange ? (
-          <div className="flex rounded-full border border-[#D9CBB3] bg-[#FBF7EE] p-1 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[#8A7560]">
+          <div className="flex rounded-full border border-[var(--pantang-line-soft)] bg-[var(--pantang-cream)] p-1 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
             <button
               type="button"
               onClick={() => onLanguageChange('en')}
-              className={`rounded-full px-3 py-1 ${language === 'en' ? 'bg-[#2B1D14] text-[#FBF7EE]' : ''}`}
+              className={`rounded-full px-3 py-1 transition ${language === 'en' ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)]' : 'hover:text-[var(--pantang-ink)]'}`}
             >
               EN
             </button>
             <button
               type="button"
               onClick={() => onLanguageChange('bm')}
-              className={`rounded-full px-3 py-1 ${language === 'bm' ? 'bg-[#2B1D14] text-[#FBF7EE]' : ''}`}
+              className={`rounded-full px-3 py-1 transition ${language === 'bm' ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)]' : 'hover:text-[var(--pantang-ink)]'}`}
             >
               BM
             </button>
@@ -58,14 +58,14 @@ export function PantangHeader({
 
 export function PantangFooter() {
   return (
-    <footer className="mx-auto mt-20 grid max-w-[1280px] gap-8 border-t border-[#D9CBB3] px-5 py-12 text-[#5C4636] sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.2fr_repeat(3,1fr)] lg:px-14">
+    <footer className="mx-auto mt-20 grid max-w-[1280px] gap-8 border-t border-[var(--pantang-line)] px-5 py-12 text-[var(--pantang-soft)] sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.25fr_repeat(3,1fr)] lg:px-14">
       <div>
         <div className="mb-4 flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />
-          <span className="font-[var(--font-serif)] text-xl font-semibold text-[#2B1D14]">Pantang</span>
+          <span className="font-[var(--font-serif)] text-xl font-semibold text-[var(--pantang-ink)]">Pantang</span>
         </div>
-        <p className="max-w-[34ch] text-sm leading-7 text-[#8A7560]">
-          A bilingual confinement-kitchen archive built for Malaysian mothers, now adapted into the live app experience.
+        <p className="max-w-[34ch] text-sm leading-7 text-[var(--pantang-muted)]">
+          A bilingual confinement-kitchen archive for Malaysian mothers, designed to feel more like a warm publication than a utility app.
         </p>
       </div>
 
@@ -85,9 +85,9 @@ export function PantangFooter() {
         ['Install the app', '/'],
       ]} />
 
-      <div className="flex flex-col gap-2 border-t border-[#E8DCC4] pt-6 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[#8A7560] sm:col-span-2 lg:col-span-4 lg:flex-row lg:justify-between">
+      <div className="flex flex-col gap-2 border-t border-[var(--pantang-line-soft)] pt-6 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--pantang-muted)] sm:col-span-2 lg:col-span-4 lg:flex-row lg:justify-between">
         <span>© 2026 Pantang Kitchen · Petaling Jaya, Malaysia</span>
-        <span>Designed from the Pantang.html handoff · Built with TanStack Start + D1</span>
+        <span>Editorial redesign inspired by impeccable.style · Built with TanStack Start + D1</span>
       </div>
     </footer>
   )
@@ -96,11 +96,11 @@ export function PantangFooter() {
 function FooterColumn({ title, links }: { title: string; links: Array<[string, string]> }) {
   return (
     <div>
-      <h3 className="mb-4 font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.18em] text-[#8A7560]">{title}</h3>
+      <h3 className="mb-4 font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--pantang-muted)]">{title}</h3>
       <ul className="space-y-2 text-sm">
         {links.map(([label, href]) => (
           <li key={label}>
-            <a href={href} className="transition hover:text-[#7A4A2B]">{label}</a>
+            <a href={href} className="transition hover:text-[var(--pantang-terra-deep)]">{label}</a>
           </li>
         ))}
       </ul>
