@@ -12,16 +12,16 @@ export function PantangHeader({
   onLanguageChange?: (language: PantangLanguage) => void
 }) {
   const linkClass = (isActive: boolean) =>
-    `rounded-full px-4 py-2 text-sm transition ${isActive ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)] shadow-[0_0_0_1px_rgba(20,20,19,0.05)]' : 'text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)] hover:text-[var(--pantang-ink)]'}`
+    `rounded-full px-3 py-2 text-sm transition ${isActive ? 'bg-[var(--pantang-ink)] text-white' : 'text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)] hover:text-[var(--pantang-ink)]'}`
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--pantang-line)] bg-[rgba(245,244,237,0.9)] backdrop-blur-xl">
-      <div className="mx-auto flex max-w-[1280px] items-center gap-5 px-5 py-4 sm:px-8 lg:px-14">
+    <header className="sticky top-0 z-40 border-b border-[var(--pantang-line)] bg-[rgba(255,255,255,0.92)] backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-14">
         <Link to="/" className="flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />
           <span className="leading-tight">
-            <span className="block font-[var(--font-serif)] text-xl font-semibold tracking-[-0.01em] text-[var(--pantang-ink)]">Pantang</span>
-            <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--pantang-muted)]">Editorial confinement kitchen</span>
+            <span className="block text-[15px] font-semibold tracking-[-0.01em] text-[var(--pantang-ink)]">Pantang Food</span>
+            <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Workspace for family recipes</span>
           </span>
         </Link>
 
@@ -35,18 +35,18 @@ export function PantangHeader({
         </nav>
 
         {language && onLanguageChange ? (
-          <div className="flex rounded-full border border-[var(--pantang-line-soft)] bg-[var(--pantang-cream)] p-1 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
+          <div className="flex rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-1 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
             <button
               type="button"
               onClick={() => onLanguageChange('en')}
-              className={`rounded-full px-3 py-1 transition ${language === 'en' ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)]' : 'hover:text-[var(--pantang-ink)]'}`}
+              className={`rounded-full px-3 py-1 transition ${language === 'en' ? 'bg-white text-[var(--pantang-ink)] shadow-sm' : 'hover:text-[var(--pantang-ink)]'}`}
             >
               EN
             </button>
             <button
               type="button"
               onClick={() => onLanguageChange('bm')}
-              className={`rounded-full px-3 py-1 transition ${language === 'bm' ? 'bg-[var(--pantang-ink)] text-[var(--pantang-cream)]' : 'hover:text-[var(--pantang-ink)]'}`}
+              className={`rounded-full px-3 py-1 transition ${language === 'bm' ? 'bg-white text-[var(--pantang-ink)] shadow-sm' : 'hover:text-[var(--pantang-ink)]'}`}
             >
               BM
             </button>
@@ -59,14 +59,14 @@ export function PantangHeader({
 
 export function PantangFooter() {
   return (
-    <footer className="mx-auto mt-20 grid max-w-[1280px] gap-8 border-t border-[var(--pantang-line)] px-5 py-12 text-[var(--pantang-soft)] sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.25fr_repeat(3,1fr)] lg:px-14">
+    <footer className="mx-auto mt-20 grid max-w-[1280px] gap-6 border-t border-[var(--pantang-line)] px-5 py-10 text-[var(--pantang-soft)] sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.25fr_repeat(3,1fr)] lg:px-14">
       <div>
         <div className="mb-4 flex items-center gap-3">
           <span className="pantang-brand-mark" aria-hidden="true" />
-          <span className="font-[var(--font-serif)] text-xl font-semibold text-[var(--pantang-ink)]">Pantang</span>
+          <span className="text-[15px] font-semibold text-[var(--pantang-ink)]">Pantang Food</span>
         </div>
         <p className="max-w-[34ch] text-sm leading-7 text-[var(--pantang-muted)]">
-          A bilingual confinement-kitchen archive for Malaysian mothers, designed to feel more like a warm publication than a utility app.
+          A bilingual confinement-kitchen archive for Malaysian mothers, shaped into a calm workspace instead of a noisy content feed.
         </p>
       </div>
 
@@ -86,9 +86,9 @@ export function PantangFooter() {
         ['Install the app', '/'],
       ]} />
 
-      <div className="flex flex-col gap-2 border-t border-[var(--pantang-line-soft)] pt-6 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--pantang-muted)] sm:col-span-2 lg:col-span-4 lg:flex-row lg:justify-between">
+      <div className="flex flex-col gap-2 border-t border-[var(--pantang-line)] pt-5 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--pantang-muted)] sm:col-span-2 lg:col-span-4 lg:flex-row lg:justify-between">
         <span>© 2026 Pantang Kitchen · Petaling Jaya, Malaysia</span>
-        <span>Impeccable editorial skill, not website mimicry · Built with TanStack Start + D1</span>
+        <span>Notion-like clarity · Built with TanStack Start + D1</span>
       </div>
     </footer>
   )
