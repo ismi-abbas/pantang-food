@@ -122,7 +122,7 @@ function Home() {
 
       <main id="home" className="mx-auto max-w-[1040px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <section className="grid gap-4 lg:grid-cols-[1.45fr_0.85fr]">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-5 shadow-[0_1px_0_rgba(0,0,0,0.02)] sm:p-6">
+          <div className="border-b border-[var(--pantang-line)] pb-6">
             <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] font-[var(--font-mono)]">
               <span>{copy.eyebrow}</span>
               <span className="h-1 w-1 rounded-full bg-[var(--pantang-terra)]" />
@@ -159,7 +159,7 @@ function Home() {
             </div>
           </div>
 
-          <aside className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-5 sm:p-6">
+          <aside className="pt-1 lg:pt-0">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Page summary</p>
@@ -169,14 +169,14 @@ function Home() {
             </div>
 
             <div className="mt-5 space-y-3">
-              <div className="rounded-2xl border border-[var(--pantang-line)] bg-white p-4">
+              <div className="border-t border-[var(--pantang-line)] py-4">
                 <p className="text-sm font-medium text-[var(--pantang-ink)]">Featured recipe</p>
                 <Link to="/recipes/$recipeId" params={{ recipeId: heroRecipe.id }} className="mt-2 block text-sm leading-6 text-[var(--pantang-soft)] transition hover:text-[var(--pantang-terra-deep)]">
                   {heroRecipe.title} · {heroRecipe.prepTime}
                 </Link>
               </div>
 
-              <div className="rounded-2xl border border-[var(--pantang-line)] bg-white p-4">
+              <div className="border-t border-[var(--pantang-line)] py-4">
                 <p className="text-sm font-medium text-[var(--pantang-ink)]">Quick facts</p>
                 <div className="mt-3 grid gap-2 text-sm text-[var(--pantang-soft)]">
                   <div className="flex items-center justify-between">
@@ -194,7 +194,7 @@ function Home() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-[var(--pantang-line)] bg-white p-4">
+              <div className="border-t border-[var(--pantang-line)] py-4">
                 <p className="text-sm font-medium text-[var(--pantang-ink)]">Design language</p>
                 <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">
                   Minimal, neutral, database-like surfaces with a single purple accent and calm spacing.
@@ -204,7 +204,7 @@ function Home() {
           </aside>
         </section>
 
-        <section id="calendar" className="mt-8 rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
+        <section id="calendar" className="mt-8 border-t border-[var(--pantang-line)] pt-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Plan</p>
@@ -223,15 +223,15 @@ function Home() {
                 key={phase.num}
                 type="button"
                 onClick={() => setActivePhase(index)}
-                className={`rounded-2xl border px-4 py-4 text-left transition ${
+                className={`border-t px-4 py-4 text-left transition ${
                   activePhase === index
-                    ? 'border-[var(--pantang-terra)] bg-[rgba(124,58,237,0.06)]'
-                    : 'border-[var(--pantang-line)] bg-[var(--pantang-warm)] hover:bg-white'
+                    ? 'border-[var(--pantang-terra)] bg-[rgba(124,58,237,0.04)]'
+                    : 'border-[var(--pantang-line)] hover:bg-[var(--pantang-warm)]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Phase {phase.num}</p>
-                  <span className="rounded-full bg-white px-2 py-1 text-[10px] text-[var(--pantang-muted)]">{phase.days}</span>
+                  <span className="text-[10px] text-[var(--pantang-muted)]">{phase.days}</span>
                 </div>
                 <p className="mt-3 text-lg font-semibold text-[var(--pantang-ink)]">{phase.name}</p>
                 <p className="mt-1 text-sm leading-6 text-[var(--pantang-soft)]">
@@ -243,7 +243,7 @@ function Home() {
         </section>
 
         <section id="recipes" className="mt-8 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-          <div className="rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
+          <div className="border-t border-[var(--pantang-line)] pt-8">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Database</p>
@@ -254,7 +254,7 @@ function Home() {
               <p className="text-sm text-[var(--pantang-soft)]">{filteredRecipes.length} visible recipes</p>
             </div>
 
-            <div className="mt-6 rounded-[1.25rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-4">
+            <div className="mt-6 border-t border-[var(--pantang-line)] pt-6">
               <div className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
                 <Search className="h-4 w-4" /> Quick filter
               </div>
@@ -286,14 +286,14 @@ function Home() {
             </div>
 
             {filteredRecipes.length === 0 ? (
-              <div className="mt-4 rounded-2xl border border-dashed border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-5 text-sm text-[var(--pantang-soft)]">
+              <div className="mt-4 border-t border-[var(--pantang-line)] py-5 text-sm text-[var(--pantang-soft)]">
                 No recipe matches yet. Try a broader filter.
               </div>
             ) : null}
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="border-t border-[var(--pantang-line)] pt-6">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Pantry</p>
@@ -303,7 +303,7 @@ function Home() {
               </div>
               <div className="mt-4 space-y-2">
                 {pantryHighlights.slice(0, 5).map((item) => (
-                  <div key={item.ingredient} className="flex items-center justify-between rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-sm text-[var(--pantang-ink)]">
+                  <div key={item.ingredient} className="flex items-center justify-between border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]">
                     <span className="truncate pr-3">{item.ingredient}</span>
                     <span className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.14em] text-[var(--pantang-muted)]">×{item.count}</span>
                   </div>
@@ -311,11 +311,11 @@ function Home() {
               </div>
             </div>
 
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="border-t border-[var(--pantang-line)] pt-6">
               <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Staples</p>
               <div className="mt-4 space-y-3">
                 {pantryStaples.slice(0, 4).map((item) => (
-                  <div key={item.name} className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3">
+                  <div key={item.name} className="border-t border-[var(--pantang-line)] py-3">
                     <p className="text-sm font-medium text-[var(--pantang-ink)]">{item.name}</p>
                     <p className="mt-1 text-sm leading-6 text-[var(--pantang-soft)]">{item.subtitle}</p>
                   </div>
@@ -326,7 +326,7 @@ function Home() {
         </section>
 
         <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-5 sm:p-6">
+          <div className="border-t border-[var(--pantang-line)] pt-8">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">References</p>
@@ -343,25 +343,20 @@ function Home() {
             </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               {cookpadInspirations.map((item) => (
-                <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="overflow-hidden rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] transition hover:-translate-y-0.5 hover:bg-white">
-                  <div className="aspect-[4/3] overflow-hidden bg-[var(--pantang-deep)]">
-                    <img src={item.imageUrl} alt={item.imageAlt} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
-                  </div>
-                  <div className="p-4">
-                    <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">{item.sourceName}</p>
-                    <h3 className="mt-2 text-base font-medium leading-6 text-[var(--pantang-ink)]">{item.title}</h3>
-                  </div>
+                <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="block border-t border-[var(--pantang-line)] py-4 transition hover:text-[var(--pantang-terra-deep)]">
+                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">{item.sourceName}</p>
+                  <h3 className="mt-2 text-base font-medium leading-6 text-[var(--pantang-ink)]">{item.title}</h3>
                 </a>
               ))}
             </div>
           </div>
 
-          <div id="stories" className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
+          <div id="stories" className="border-t border-[var(--pantang-line)] pt-8">
             <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Notes</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">Mother stories, kept short</h2>
             <div className="mt-5 space-y-3">
               {stories.map((story) => (
-                <blockquote key={story.name} className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-4">
+                <blockquote key={story.name} className="border-t border-[var(--pantang-line)] pt-4">
                   <p className="text-sm leading-7 text-[var(--pantang-ink)]">“{story.quote}”</p>
                   <footer className="mt-3 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
                     {story.name} · {story.where}

@@ -80,7 +80,7 @@ function RecipeDetailPage() {
         </Button>
 
         <section className="mt-6 grid gap-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-4 sm:p-5">
+          <div className="border-b border-[var(--pantang-line)] pb-6">
             <div className={`overflow-hidden rounded-[1.4rem] border border-[var(--pantang-line)] bg-[var(--pantang-deep)]`}>
               <div className="flex items-center justify-between gap-4 p-4 pb-0">
                 <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-white px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
@@ -120,21 +120,18 @@ function RecipeDetailPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.category}</Badge>
-                <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.week}</Badge>
-                {recipe.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">#{tag}</Badge>
-                ))}
-              </div>
-              <h1 className="mt-5 text-[clamp(2.4rem,5.3vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--pantang-ink)]">
-                {recipe.title}
-              </h1>
-              <p className="mt-5 max-w-[58ch] text-[1.05rem] leading-8 text-[var(--pantang-soft)]">{recipe.summary}</p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.category}</Badge>
+              <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.week}</Badge>
+              {recipe.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">#{tag}</Badge>
+              ))}
             </div>
-
-            <div className="grid gap-3 rounded-[1.5rem] border border-[var(--pantang-line)] bg-white p-3 sm:grid-cols-2 xl:grid-cols-4">
+            <h1 className="mt-5 text-[clamp(2.4rem,5.3vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--pantang-ink)]">
+              {recipe.title}
+            </h1>
+            <p className="mt-5 max-w-[58ch] text-[1.05rem] leading-8 text-[var(--pantang-soft)]">{recipe.summary}</p>
+            <div className="grid gap-3 border-t border-[var(--pantang-line)] pt-6 sm:grid-cols-2 xl:grid-cols-4">
               <MetaStat label="Time" value={recipe.prepTime} icon={<Clock3 className="h-4 w-4" />} />
               <MetaStat label="Yield" value={recipe.servings} icon={<UtensilsCrossed className="h-4 w-4" />} />
               <MetaStat label="Benefit" value={recipe.benefit} icon={<ListFilter className="h-4 w-4" />} />
@@ -145,7 +142,7 @@ function RecipeDetailPage() {
 
         <section className="mt-8 grid gap-4 lg:grid-cols-[0.75fr_1.25fr]">
           <aside className="space-y-6 lg:sticky lg:top-24">
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="border-t border-[var(--pantang-line)] pt-8">
               <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Ingredients · Bahan-bahan</p>
               <ul className="mt-4 space-y-3">
                 {recipe.ingredients.map((item) => (
@@ -157,14 +154,14 @@ function RecipeDetailPage() {
               </ul>
             </div>
 
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="border-t border-[var(--pantang-line)] pt-8">
               <div className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
                 <ShoppingBasket className="h-4 w-4" /> Shopping list
               </div>
               <p className="mt-3 text-sm leading-7 text-[var(--pantang-muted)]">This combines the current recipe with your saved favourites.</p>
               <div className="mt-4 space-y-2">
                 {shoppingList.map((item: string) => (
-                  <div key={item} className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-sm text-[var(--pantang-ink)]">
+                  <div key={item} className="border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]">
                     {item}
                   </div>
                 ))}
@@ -173,7 +170,7 @@ function RecipeDetailPage() {
           </aside>
 
           <div className="space-y-6">
-            <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="border-t border-[var(--pantang-line)] pt-8">
               <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Method · Cara memasak</p>
               <div className="mt-4 space-y-1">
                 {recipe.steps.map((item, index) => (
@@ -182,7 +179,7 @@ function RecipeDetailPage() {
                     <div>
                       <p className="text-[1rem] leading-8 text-[var(--pantang-ink)]">{item}</p>
                       {recipe.pantryTips[index] ? (
-                        <div className="mt-3 rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-sm leading-7 text-[var(--pantang-soft)]">
+                        <div className="mt-3 border-t border-[var(--pantang-line)] pt-3 text-sm leading-7 text-[var(--pantang-soft)]">
                           {recipe.pantryTips[index]}
                         </div>
                       ) : null}
@@ -192,24 +189,24 @@ function RecipeDetailPage() {
               </div>
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-2">
-              <section className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="grid gap-6 xl:grid-cols-2 border-t border-[var(--pantang-line)] pt-8">
+              <section className="border-t border-[var(--pantang-line)] pt-8">
                 <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">Kitchen notes</h2>
                 <div className="mt-4 space-y-2">
                   {recipe.pantryTips.map((tip: string) => (
-                    <div key={tip} className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-sm leading-7 text-[var(--pantang-soft)]">{tip}</div>
+                    <div key={tip} className="border-t border-[var(--pantang-line)] pt-3 text-sm leading-7 text-[var(--pantang-soft)]">{tip}</div>
                   ))}
                 </div>
               </section>
 
-              <section className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+              <section className="border-t border-[var(--pantang-line)] pt-8">
                 <h3 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">{wisdom.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--pantang-soft)]">{wisdom.body}</p>
               </section>
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-2">
-              <section className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+            <div className="grid gap-6 xl:grid-cols-2 border-t border-[var(--pantang-line)] pt-8">
+              <section className="border-t border-[var(--pantang-line)] pt-8">
                 <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">Open another recipe</h2>
                 <div className="mt-4 space-y-3">
                   {relatedRecipes.map((item: Recipe) => (
@@ -217,7 +214,7 @@ function RecipeDetailPage() {
                       key={item.id}
                       to="/recipes/$recipeId"
                       params={{ recipeId: item.id }}
-                      className="block rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-4 transition hover:bg-white"
+                      className="block border-t border-[var(--pantang-line)] py-4 transition hover:text-[var(--pantang-terra-deep)]"
                     >
                       <p className="font-medium text-[var(--pantang-ink)]">{item.title}</p>
                       <p className="mt-1 text-sm text-[var(--pantang-muted)]">
@@ -228,7 +225,7 @@ function RecipeDetailPage() {
                 </div>
               </section>
 
-              <section className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+              <section className="border-t border-[var(--pantang-line)] pt-8">
                 <h2 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">Other favourites</h2>
                 <div className="mt-4 space-y-3">
                   {favouriteRecipes.length > 0 ? favouriteRecipes.map((item: Recipe) => (
@@ -236,7 +233,7 @@ function RecipeDetailPage() {
                       key={item.id}
                       to="/recipes/$recipeId"
                       params={{ recipeId: item.id }}
-                      className="block rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-4 transition hover:bg-white"
+                      className="block border-t border-[var(--pantang-line)] py-4 transition hover:text-[var(--pantang-terra-deep)]"
                     >
                       <p className="font-medium text-[var(--pantang-ink)]">{item.title}</p>
                       <p className="mt-1 text-sm text-[var(--pantang-muted)]">{item.benefit}</p>
@@ -256,7 +253,7 @@ function RecipeDetailPage() {
 
 function MetaStat({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-4">
+    <div className="border-t border-[var(--pantang-line)] pt-4">
       <div className="flex items-center gap-2 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
         {icon}
         <span>{label}</span>

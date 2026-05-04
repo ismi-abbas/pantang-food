@@ -42,7 +42,7 @@ function SavedRecipesPage() {
         </Link>
 
         <section className="mt-4 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-          <div className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6 sm:p-8">
+          <div className="border-b border-[var(--pantang-line)] pb-6">
             <div className="flex flex-wrap items-center gap-3">
               <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
                 <Heart className="h-3.5 w-3.5" /> Saved shelf
@@ -69,7 +69,7 @@ function SavedRecipesPage() {
             </div>
           </div>
 
-          <aside className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-5 sm:p-6">
+          <aside className="pt-1 lg:pt-0">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Featured</p>
@@ -77,7 +77,7 @@ function SavedRecipesPage() {
               </div>
               <Sparkles className="h-5 w-5 text-[var(--pantang-terra)]" />
             </div>
-            <div className="mt-4 rounded-2xl border border-[var(--pantang-line)] bg-white p-4">
+            <div className="mt-4 border-t border-[var(--pantang-line)] py-4">
               <p className="text-sm font-medium text-[var(--pantang-ink)]">
                 {featuredRecipe.title}
               </p>
@@ -86,7 +86,7 @@ function SavedRecipesPage() {
                 {featuredRecipe.week} · {featuredRecipe.category} · {featuredRecipe.prepTime}
               </p>
             </div>
-            <div className="mt-4 rounded-2xl border border-[var(--pantang-line)] bg-white p-4">
+            <div className="mt-4 border-t border-[var(--pantang-line)] py-4">
               <p className="text-sm font-medium text-[var(--pantang-ink)]">Shelf note</p>
               <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">
                 Keep a few warm soups, a ginger drink, and one quick protein dish ready to repeat.
@@ -105,19 +105,19 @@ function SavedRecipesPage() {
             </div>
 
             {savedRecipes.length > 0 ? (
-              <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-[var(--pantang-line)] bg-white">
+              <div className="mt-4 border-t border-[var(--pantang-line)] py-4">
                 {savedRecipes.map((recipe: Recipe) => (
                   <RecipeRow key={recipe.id} recipe={recipe} />
                 ))}
               </div>
             ) : (
-              <div className="mt-4 rounded-[1.5rem] border border-dashed border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-6 text-sm leading-7 text-[var(--pantang-soft)]">
+              <div className="mt-4 border-t border-[var(--pantang-line)] py-6 text-sm leading-7 text-[var(--pantang-soft)]">
                 No recipes are saved yet. Tap the heart on any recipe page to fill this shelf.
               </div>
             )}
           </div>
 
-          <aside id="shopping-list" className="rounded-[1.75rem] border border-[var(--pantang-line)] bg-white p-6">
+          <aside id="shopping-list" className="border-t border-[var(--pantang-line)] pt-8">
             <div className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
               <ShoppingBasket className="h-4 w-4" /> Shopping list
             </div>
@@ -125,12 +125,12 @@ function SavedRecipesPage() {
             <div className="mt-4 space-y-2">
               {shoppingList.length > 0 ? (
                 shoppingList.map((item) => (
-                  <div key={item} className="rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-sm text-[var(--pantang-ink)]">
+                  <div key={item} className="border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]">
                     {item}
                   </div>
                 ))
               ) : (
-                <div className="rounded-2xl border border-dashed border-[var(--pantang-line)] px-4 py-4 text-sm leading-7 text-[var(--pantang-muted)]">
+                <div className="border-t border-[var(--pantang-line)] pt-4 text-sm leading-7 text-[var(--pantang-muted)]">
                   Save a few recipes and the shopping list will appear here.
                 </div>
               )}
