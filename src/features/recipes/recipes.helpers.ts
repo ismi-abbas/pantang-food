@@ -1,5 +1,7 @@
 import type { CreateRecipeInput, Recipe, RecipeFilter, RecipeWeek } from './recipes.types'
 
+const EMPTY_IDS: string[] = []
+
 const recipeWeeks: RecipeWeek[] = ['Week 1', 'Week 2', 'Week 3+']
 
 export function slugifyRecipeId(title: string) {
@@ -44,6 +46,46 @@ export function buildShoppingList(recipes: Recipe[], selectedRecipeIds: string[]
   }
 
   return items
+}
+
+export function parseStoredRecipeIds(value: string | null | undefined) {
+  if (!value) return EMPTY_IDS
+
+  try {
+    const parsed = JSON.parse(value)
+    if (!Array.isArray(parsed)) return EMPTY_IDS
+
+    const seen = new Set<string>()
+    const ids: string[] = []
+
+    for (const item of parsed) {
+      if (typeof item !== 'string') continue
+      const id = item.trim()
+      if (!id || seen.has(id)) continue
+      seen.add(id)
+      ids.push(id)
+    }
+
+    return ids
+  } catch {
+    return EMPTY_IDS
+  }
+}
+
+export function selectRecipesByIds(recipes: Recipe[], ids: string[]) {
+  const seen = new Set<string>()
+  const selected: Recipe[] = []
+
+  for (const id of ids) {
+    if (seen.has(id)) continue
+    seen.add(id)
+
+    const recipe = recipes.find((item) => item.id === id)
+    if (!recipe) continue
+    selected.push(recipe)
+  }
+
+  return selected
 }
 
 export function splitLines(value: string) {

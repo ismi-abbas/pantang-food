@@ -7,6 +7,7 @@ Pantang Food is a TanStack Start recipe app for Malay moms to browse, save, and 
 - Installable PWA support
 - 18 pantang-friendly seeded recipes
 - Search and filters by category, benefit, and recovery week
+- Saved shelf with local shopping list generation
 - Custom recipe form and dedicated recipe pages
 - Cloudflare Workers deployment
 - Cloudflare D1 database binding for deployed runtime

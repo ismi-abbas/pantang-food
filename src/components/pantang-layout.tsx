@@ -7,7 +7,7 @@ export function PantangHeader({
   language,
   onLanguageChange,
 }: {
-  active: 'home' | 'recipes' | 'detail'
+  active: 'home' | 'recipes' | 'detail' | 'saved'
   language?: PantangLanguage
   onLanguageChange?: (language: PantangLanguage) => void
 }) {
@@ -28,6 +28,7 @@ export function PantangHeader({
         <nav className="ml-auto hidden items-center gap-1 md:flex">
           <a href="/#home" className={linkClass(active === 'home')}>Home</a>
           <a href="/#recipes" className={linkClass(active === 'recipes' || active === 'detail')}>Recipes</a>
+          <a href="/saved" className={linkClass(active === 'saved')}>Saved</a>
           <a href="/#calendar" className={linkClass(false)}>Plan</a>
           <a href="/#pantry" className={linkClass(false)}>Pantry</a>
           <a href="/#stories" className={linkClass(false)}>Stories</a>
@@ -81,7 +82,7 @@ export function PantangFooter() {
       ]} />
       <FooterColumn title="Share" links={[
         ['Submit a recipe', '/#compose'],
-        ['Browse D1 recipes', '/#recipes'],
+        ['Saved recipes', '/saved'],
         ['Install the app', '/'],
       ]} />
 

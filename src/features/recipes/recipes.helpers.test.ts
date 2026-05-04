@@ -7,6 +7,8 @@ import {
   filterRecipes,
   getTopPantryItems,
   normalizeRecipeInput,
+  parseStoredRecipeIds,
+  selectRecipesByIds,
   slugifyRecipeId,
   splitLines,
 } from './recipes.helpers'
@@ -95,6 +97,28 @@ describe('buildShoppingList', () => {
       '2 inci halia',
       '700ml air',
       '1/2 cawan beras',
+    ])
+  })
+})
+
+describe('parseStoredRecipeIds', () => {
+  it('returns unique string ids from stored JSON and ignores invalid entries', () => {
+    expect(parseStoredRecipeIds('["sup-ayam-halia", "", 42, "bubur-nasi-pantang", "sup-ayam-halia"]')).toEqual([
+      'sup-ayam-halia',
+      'bubur-nasi-pantang',
+    ])
+  })
+
+  it('returns an empty array for invalid storage payloads', () => {
+    expect(parseStoredRecipeIds('not json at all')).toEqual([])
+  })
+})
+
+describe('selectRecipesByIds', () => {
+  it('returns recipes in saved order and skips missing ids', () => {
+    expect(selectRecipesByIds(recipes, ['bubur-nasi-pantang', 'missing', 'sup-ayam-halia', 'sup-ayam-halia'])).toEqual([
+      recipes[1],
+      recipes[0],
     ])
   })
 })

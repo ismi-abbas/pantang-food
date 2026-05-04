@@ -144,6 +144,9 @@ function Home() {
               <a href="#calendar" className="inline-flex items-center rounded-full border border-[var(--pantang-line)] px-6 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-warm)]">
                 {copy.ctaSecondary}
               </a>
+              <Link to="/saved" className="inline-flex items-center rounded-full border border-[var(--pantang-line)] px-6 py-3 text-sm font-medium text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-warm)]">
+                Saved shelf
+              </Link>
             </div>
             <blockquote className="mt-10 max-w-[44ch] border-l-2 border-[var(--pantang-terra)] pl-5">
               <p className="font-[var(--font-serif)] text-lg italic leading-8 text-[var(--pantang-ink)]">“{copy.quote}”</p>
