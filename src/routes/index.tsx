@@ -63,6 +63,7 @@ function Home() {
   const calendar = useMemo(() => buildPantangCalendar(), [])
   const stories = useMemo(() => getPantangStories(), [])
   const cookpadInspirations = useMemo(() => getCookpadInspirations(6), [])
+  const featuredCookpad = useMemo(() => cookpadInspirations.slice(0, 3), [cookpadInspirations])
   const copy = getPantangHeroCopy(language)
   const heroRecipe = featuredRecipes[0] || recipes[0]
 
@@ -120,7 +121,7 @@ function Home() {
             <div className="mb-7 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] font-[var(--font-mono)]">
               <span>{copy.eyebrow}</span>
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--pantang-terra)]" />
-              <span>Updated from the design handoff</span>
+              <span>Refined with the impeccable editorial skill</span>
             </div>
             <h1 className="font-[var(--font-serif)] text-[clamp(2.8rem,7vw,5.5rem)] leading-[0.98] tracking-[-0.03em] text-[var(--pantang-ink)]">
               {copy.headline}
@@ -240,12 +241,12 @@ function Home() {
             <div>
               <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Cookpad inspirations</p>
               <h2 className="mt-3 font-[var(--font-serif)] text-[clamp(2rem,3.5vw,2.8rem)] leading-tight tracking-[-0.02em] text-[var(--pantang-ink)]">
-                Real pantang food photography
+                Selected references from the
                 <br />
-                scraped from the ibu pantang search.
+                Cookpad Malaysia ibu pantang search.
               </h2>
               <p className="mt-4 max-w-[56ch] text-sm leading-7 text-[var(--pantang-soft)]">
-                These references come from the Cookpad Malaysia ibu pantang search results you linked, and now help the app feel more grounded in real home-cooked meals.
+                Real home-cooked photos keep the archive grounded and help the app feel lived-in instead of generic.
               </p>
             </div>
             <a
@@ -257,8 +258,8 @@ function Home() {
               Open Cookpad source <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {cookpadInspirations.map((item) => (
+          <div className="grid gap-4 md:grid-cols-3">
+            {featuredCookpad.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -268,7 +269,7 @@ function Home() {
               >
                 <img src={item.imageUrl} alt={item.imageAlt} className="h-56 w-full object-cover" referrerPolicy="no-referrer" />
                 <div className="p-5">
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Scraped from {item.sourceName}</p>
+                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Reference from {item.sourceName}</p>
                   <h3 className="mt-2 font-[var(--font-serif)] text-2xl leading-tight text-[var(--pantang-ink)]">{item.title}</h3>
                 </div>
               </a>
@@ -293,12 +294,14 @@ function Home() {
                 ))}
               </div>
             </div>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
               {pantryStaples.map((item) => (
-                <div key={item.name} className="bg-[var(--pantang-ink)] px-5 py-5">
-                  <p className="font-[var(--font-serif)] text-xl">{item.name}</p>
-                  <p className="mt-2 text-sm italic text-[rgba(251,247,238,0.58)]">{item.subtitle}</p>
-                  <p className="mt-4 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-terra)]">{item.role}</p>
+                <div key={item.name} className="grid gap-2 border-b border-white/10 px-5 py-5 sm:grid-cols-[1.1fr_auto] sm:items-baseline last:border-b-0">
+                  <div>
+                    <p className="font-[var(--font-serif)] text-xl">{item.name}</p>
+                    <p className="mt-1 text-sm italic text-[rgba(251,247,238,0.58)]">{item.subtitle}</p>
+                  </div>
+                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-terra)]">{item.role}</p>
                 </div>
               ))}
             </div>
@@ -314,18 +317,16 @@ function Home() {
               who cooked through it.
             </h2>
           </div>
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="border-t border-[var(--pantang-line-soft)]">
             {stories.map((story) => (
-              <article key={story.name} className="flex rounded-[1.6rem] border border-[var(--pantang-line-soft)] bg-[var(--pantang-cream)] p-6">
-                <div className="flex min-h-full flex-col">
-                  <p className="font-[var(--font-serif)] text-lg leading-8 text-[var(--pantang-ink)]">“{story.quote}”</p>
-                  <div className="mt-auto flex items-center gap-3 pt-6">
-                    <span className="h-10 w-10 rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-deep)]" aria-hidden="true" />
-                    <span>
-                      <span className="block text-sm font-medium text-[var(--pantang-ink)]">{story.name}</span>
-                      <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{story.where}</span>
-                    </span>
-                  </div>
+              <article key={story.name} className="grid gap-4 border-b border-[var(--pantang-line-soft)] py-6 lg:grid-cols-[1fr_180px] lg:gap-8">
+                <p className="font-[var(--font-serif)] text-lg leading-8 text-[var(--pantang-ink)]">“{story.quote}”</p>
+                <div className="flex items-center gap-3 lg:justify-end lg:text-right">
+                  <span className="h-10 w-10 rounded-full border border-[var(--pantang-line)] bg-[var(--pantang-deep)]" aria-hidden="true" />
+                  <span>
+                    <span className="block text-sm font-medium text-[var(--pantang-ink)]">{story.name}</span>
+                    <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{story.where}</span>
+                  </span>
                 </div>
               </article>
             ))}

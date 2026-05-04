@@ -87,7 +87,7 @@ export function PantangFooter() {
 
       <div className="flex flex-col gap-2 border-t border-[var(--pantang-line-soft)] pt-6 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--pantang-muted)] sm:col-span-2 lg:col-span-4 lg:flex-row lg:justify-between">
         <span>© 2026 Pantang Kitchen · Petaling Jaya, Malaysia</span>
-        <span>Editorial redesign inspired by impeccable.style · Built with TanStack Start + D1</span>
+        <span>Impeccable editorial skill, not website mimicry · Built with TanStack Start + D1</span>
       </div>
     </footer>
   )
