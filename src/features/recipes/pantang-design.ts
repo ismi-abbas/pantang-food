@@ -44,22 +44,22 @@ const heroCopy: Record<PantangLanguage, PantangHeroCopy> = {
     eyebrow: 'Est. 44 days · For Malaysian mothers',
     headline: 'Forty-four days of',
     accent: 'quiet, warming',
-    lede:
-      'A bilingual confinement kitchen for new mothers across Malaysia — Malay, Chinese, and Indian traditions, written down at last and arranged by week.',
+    lede: 'A bilingual confinement kitchen for new mothers across Malaysia: Malay, Chinese, and Indian traditions, written down at last and arranged by week.',
     ctaPrimary: 'Browse the recipes',
     ctaSecondary: 'See the 44-day plan',
-    quote: 'Mak said the kitchen is the second womb. The first holds the baby; the second holds the mother.',
+    quote:
+      'Mak said the kitchen is the second womb. The first holds the baby; the second holds the mother.',
     quoteByline: 'Note from Mak Cik Salmah, Kuala Pilah',
   },
   bm: {
     eyebrow: 'Tempoh 44 hari · Untuk ibu di Malaysia',
     headline: 'Empat puluh empat hari',
     accent: 'makanan hangat, tenang',
-    lede:
-      'Dapur pantang dwibahasa untuk ibu baru di seluruh Malaysia — tradisi Melayu, Cina dan India, akhirnya direkodkan dan disusun mengikut minggu.',
+    lede: 'Dapur pantang dwibahasa untuk ibu baru di seluruh Malaysia: tradisi Melayu, Cina dan India, akhirnya direkodkan dan disusun mengikut minggu.',
     ctaPrimary: 'Lihat resipi',
     ctaSecondary: 'Lihat pelan 44 hari',
-    quote: 'Mak kata dapur ialah rahim kedua. Rahim pertama memegang bayi; yang kedua memegang ibu.',
+    quote:
+      'Mak kata dapur ialah rahim kedua. Rahim pertama memegang bayi; yang kedua memegang ibu.',
     quoteByline: 'Catatan Mak Cik Salmah, Kuala Pilah',
   },
 }
@@ -88,7 +88,7 @@ const motherStories: PantangStory[] = [
   },
   {
     quote:
-      'Bilingual instructions saved me — I can read along while my mother-in-law explains what just enough means.',
+      'Bilingual instructions saved me. I can read along while my mother-in-law explains what just enough means.',
     name: 'Priya S.',
     where: 'Ipoh',
   },
@@ -119,9 +119,12 @@ export function getPantangStories() {
 
 export function buildRecipeWisdom(recipe: Recipe) {
   const weekGuidance = {
-    'Week 1': 'Week 1 recipes focus on warmth and easy nourishment while the body settles after birth.',
-    'Week 2': 'Week 2 recipes focus on strengthening daily rhythm while supporting milk supply.',
-    'Week 3+': 'Week 3+ recipes help mothers rebuild energy while adding more variety back into the kitchen.',
+    'Week 1':
+      'Week 1 recipes focus on warmth and easy nourishment while the body settles after birth.',
+    'Week 2':
+      'Week 2 recipes focus on strengthening daily rhythm while supporting milk supply.',
+    'Week 3+':
+      'Week 3+ recipes help mothers rebuild energy while adding more variety back into the kitchen.',
   } as const
 
   const benefitGuidance = {

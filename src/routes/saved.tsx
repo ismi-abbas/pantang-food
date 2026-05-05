@@ -5,7 +5,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
 import { Button } from '#/components/ui/button'
 import { Badge } from '#/components/ui/badge'
-import { buildShoppingList, parseStoredRecipeIds, selectRecipesByIds } from '#/features/recipes/recipes.helpers'
+import {
+  buildShoppingList,
+  parseStoredRecipeIds,
+  selectRecipesByIds,
+} from '#/features/recipes/recipes.helpers'
 import { getRecipes } from '#/features/recipes/recipes.functions'
 import type { Recipe } from '#/features/recipes/recipes.types'
 
@@ -21,11 +25,19 @@ function SavedRecipesPage() {
   const [savedIds, setSavedIds] = useState<string[]>([])
 
   useEffect(() => {
-    setSavedIds(parseStoredRecipeIds(window.localStorage.getItem(FAVORITES_KEY)))
+    setSavedIds(
+      parseStoredRecipeIds(window.localStorage.getItem(FAVORITES_KEY)),
+    )
   }, [])
 
-  const savedRecipes = useMemo(() => selectRecipesByIds(recipes, savedIds), [recipes, savedIds])
-  const shoppingList = useMemo(() => buildShoppingList(recipes, savedIds), [recipes, savedIds])
+  const savedRecipes = useMemo(
+    () => selectRecipesByIds(recipes, savedIds),
+    [recipes, savedIds],
+  )
+  const shoppingList = useMemo(
+    () => buildShoppingList(recipes, savedIds),
+    [recipes, savedIds],
+  )
   const savedCount = savedRecipes.length
   const featuredRecipe = savedRecipes[0] ?? recipes[0]
 
@@ -44,7 +56,10 @@ function SavedRecipesPage() {
         <section className="mt-4 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div className="border-b border-[var(--pantang-line)] pb-6">
             <div className="flex flex-wrap items-center gap-3">
-              <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
+              <Badge
+                variant="outline"
+                className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]"
+              >
                 <Heart className="h-3.5 w-3.5" /> Saved shelf
               </Badge>
               <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
@@ -55,13 +70,26 @@ function SavedRecipesPage() {
               Recipes you want to cook again.
             </h1>
             <p className="mt-5 max-w-[54ch] text-[1.05rem] leading-8 text-[var(--pantang-soft)]">
-              This shelf keeps the recipes you have marked with the heart icon and turns them into a practical shopping list for the next kitchen session.
+              This shelf keeps the recipes you have marked with the heart icon
+              and turns them into a practical shopping list for the next kitchen
+              session.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button asChild variant="outline" className="h-10 rounded-full px-5 text-sm font-medium">
+              <Button
+                asChild
+                variant="outline"
+                className="h-10 rounded-full px-5 text-sm font-medium"
+              >
                 <Link to="/">Browse recipes</Link>
               </Button>
-              <Button asChild className="h-10 rounded-full px-5 text-sm font-medium" style={{ backgroundColor: 'var(--pantang-ink)', color: 'white' }}>
+              <Button
+                asChild
+                className="h-10 rounded-full px-5 text-sm font-medium"
+                style={{
+                  backgroundColor: 'var(--pantang-ink)',
+                  color: 'white',
+                }}
+              >
                 <a href="#shopping-list">
                   <ShoppingBasket className="h-4 w-4" /> View shopping list
                 </a>
@@ -72,8 +100,12 @@ function SavedRecipesPage() {
           <aside className="pt-1 lg:pt-0">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Featured</p>
-                <h2 className="mt-2 text-xl font-semibold text-[var(--pantang-ink)]">Local shelf preview</h2>
+                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
+                  Featured
+                </p>
+                <h2 className="mt-2 text-xl font-semibold text-[var(--pantang-ink)]">
+                  Local shelf preview
+                </h2>
               </div>
               <Sparkles className="h-5 w-5 text-[var(--pantang-terra)]" />
             </div>
@@ -81,15 +113,21 @@ function SavedRecipesPage() {
               <p className="text-sm font-medium text-[var(--pantang-ink)]">
                 {featuredRecipe.title}
               </p>
-              <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">{featuredRecipe.summary}</p>
+              <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">
+                {featuredRecipe.summary}
+              </p>
               <p className="mt-3 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                {featuredRecipe.week} · {featuredRecipe.category} · {featuredRecipe.prepTime}
+                {featuredRecipe.week} · {featuredRecipe.category} ·{' '}
+                {featuredRecipe.prepTime}
               </p>
             </div>
             <div className="mt-4 border-t border-[var(--pantang-line)] py-4">
-              <p className="text-sm font-medium text-[var(--pantang-ink)]">Shelf note</p>
+              <p className="text-sm font-medium text-[var(--pantang-ink)]">
+                Shelf note
+              </p>
               <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">
-                Keep a few warm soups, a ginger drink, and one quick protein dish ready to repeat.
+                Keep a few warm soups, a ginger drink, and one quick protein
+                dish ready to repeat.
               </p>
             </div>
           </aside>
@@ -99,8 +137,12 @@ function SavedRecipesPage() {
           <div>
             <div className="flex items-end justify-between gap-4 border-b border-[var(--pantang-line)] pb-4">
               <div>
-                <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">Saved recipes</p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">Your private collection</h2>
+                <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
+                  Saved recipes
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
+                  Your private collection
+                </h2>
               </div>
             </div>
 
@@ -112,20 +154,29 @@ function SavedRecipesPage() {
               </div>
             ) : (
               <div className="mt-4 border-t border-[var(--pantang-line)] py-6 text-sm leading-7 text-[var(--pantang-soft)]">
-                No recipes are saved yet. Tap the heart on any recipe page to fill this shelf.
+                No recipes are saved yet. Tap the heart on any recipe page to
+                fill this shelf.
               </div>
             )}
           </div>
 
-          <aside id="shopping-list" className="border-t border-[var(--pantang-line)] pt-8">
+          <aside
+            id="shopping-list"
+            className="border-t border-[var(--pantang-line)] pt-8"
+          >
             <div className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
               <ShoppingBasket className="h-4 w-4" /> Shopping list
             </div>
-            <p className="mt-3 text-sm leading-7 text-[var(--pantang-muted)]">Ingredients combined from your saved shelf.</p>
+            <p className="mt-3 text-sm leading-7 text-[var(--pantang-muted)]">
+              Ingredients combined from your saved shelf.
+            </p>
             <div className="mt-4 space-y-2">
               {shoppingList.length > 0 ? (
                 shoppingList.map((item) => (
-                  <div key={item} className="border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]">
+                  <div
+                    key={item}
+                    className="border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]"
+                  >
                     {item}
                   </div>
                 ))
@@ -149,24 +200,45 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
     <Link
       to="/recipes/$recipeId"
       params={{ recipeId: recipe.id }}
-      className="grid gap-3 border-b border-[var(--pantang-line)] px-4 py-4 transition last:border-b-0 hover:bg-[rgba(124,58,237,0.04)] md:grid-cols-[1.6fr_0.7fr] md:items-center"
+      className="grid gap-3 border-b border-[var(--pantang-line)] px-4 py-4 transition last:border-b-0 hover:bg-[color:oklch(0.565_0.14_43_/_7%)] md:grid-cols-[1.6fr_0.7fr] md:items-center"
     >
       <div className="flex min-w-0 items-center gap-3">
         <div className="h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-[var(--pantang-line)] bg-[var(--pantang-deep)]">
           {recipe.imageUrl ? (
-            <img src={recipe.imageUrl} alt={recipe.imageAlt ?? recipe.title} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
+            <img
+              src={recipe.imageUrl}
+              alt={recipe.imageAlt ?? recipe.title}
+              className="h-full w-full object-cover"
+              referrerPolicy="no-referrer"
+            />
           ) : (
-            <div className="flex h-full items-center justify-center text-[10px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">Recipe</div>
+            <div className="flex h-full items-center justify-center text-[10px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
+              Recipe
+            </div>
           )}
         </div>
         <div className="min-w-0">
-          <p className="truncate text-base font-medium text-[var(--pantang-ink)]">{recipe.title}</p>
-          <p className="mt-1 line-clamp-2 text-sm leading-6 text-[var(--pantang-soft)]">{recipe.summary}</p>
+          <p className="truncate text-base font-medium text-[var(--pantang-ink)]">
+            {recipe.title}
+          </p>
+          <p className="mt-1 line-clamp-2 text-sm leading-6 text-[var(--pantang-soft)]">
+            {recipe.summary}
+          </p>
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)] md:justify-end">
-        <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.week}</Badge>
-        <Badge variant="outline" className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]">{recipe.benefit}</Badge>
+        <Badge
+          variant="outline"
+          className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]"
+        >
+          {recipe.week}
+        </Badge>
+        <Badge
+          variant="outline"
+          className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[var(--pantang-muted)]"
+        >
+          {recipe.benefit}
+        </Badge>
       </div>
     </Link>
   )
