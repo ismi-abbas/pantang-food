@@ -483,7 +483,7 @@ function FilterRow<T extends string>({
             variant={activeItem === item ? 'default' : 'outline'}
             size="sm"
             onClick={() => onPick(item)}
-            className={`h-8 rounded-full px-3 text-sm ${activeItem === item ? 'bg-[var(--pantang-terra)] text-[var(--pantang-cream)] hover:bg-[var(--pantang-terra-deep)]' : 'bg-[var(--pantang-cream)] text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)]'}`}
+            className={`h-8 rounded-full px-3 text-sm ${activeItem === item ? 'bg-[var(--pantang-terra-deep)] text-[var(--pantang-cream)] hover:bg-[var(--pantang-ink)]' : 'bg-[var(--pantang-cream)] text-[var(--pantang-soft)] hover:bg-[var(--pantang-warm)]'}`}
           >
             {item}
           </Button>

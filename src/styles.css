@@ -38,7 +38,7 @@
   --card-foreground: var(--pantang-ink);
   --popover: var(--pantang-cream);
   --popover-foreground: var(--pantang-ink);
-  --primary: var(--pantang-terra);
+  --primary: var(--pantang-terra-deep);
   --primary-foreground: var(--pantang-cream);
   --secondary: var(--pantang-warm);
   --secondary-foreground: var(--pantang-ink);
@@ -58,7 +58,7 @@
   --radius: 0.75rem;
   --sidebar: var(--pantang-cream);
   --sidebar-foreground: var(--pantang-ink);
-  --sidebar-primary: var(--pantang-terra);
+  --sidebar-primary: var(--pantang-terra-deep);
   --sidebar-primary-foreground: var(--pantang-cream);
   --sidebar-accent: var(--pantang-warm);
   --sidebar-accent-foreground: var(--pantang-ink);

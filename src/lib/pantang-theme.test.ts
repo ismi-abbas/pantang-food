@@ -20,12 +20,26 @@ describe('pantangTheme contrast', () => {
   })
 
   it('keeps secondary body text readable on the main light surfaces', () => {
-    expect(contrastRatio(pantangTheme.muted, pantangTheme.bg)).toBeGreaterThanOrEqual(4.5)
-    expect(contrastRatio(pantangTheme.muted, pantangTheme.warm)).toBeGreaterThanOrEqual(4.5)
-    expect(contrastRatio(pantangTheme.muted, pantangTheme.deep)).toBeGreaterThanOrEqual(4.5)
+    expect(
+      contrastRatio(pantangTheme.muted, pantangTheme.bg),
+    ).toBeGreaterThanOrEqual(4.5)
+    expect(
+      contrastRatio(pantangTheme.muted, pantangTheme.warm),
+    ).toBeGreaterThanOrEqual(4.5)
+    expect(
+      contrastRatio(pantangTheme.muted, pantangTheme.deep),
+    ).toBeGreaterThanOrEqual(4.5)
   })
 
   it('keeps terracotta accent labels readable on dark ink backgrounds', () => {
-    expect(contrastRatio(pantangTheme.terra, pantangTheme.ink)).toBeGreaterThanOrEqual(4.5)
+    expect(
+      contrastRatio(pantangTheme.terra, pantangTheme.ink),
+    ).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it('keeps primary button text readable on darker terracotta', () => {
+    expect(
+      contrastRatio(pantangTheme.cream, pantangTheme.terraDeep),
+    ).toBeGreaterThanOrEqual(4.5)
   })
 })

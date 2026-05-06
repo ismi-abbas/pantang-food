@@ -12,6 +12,7 @@ import {
 } from '#/features/recipes/recipes.helpers'
 import { getRecipes } from '#/features/recipes/recipes.functions'
 import type { Recipe } from '#/features/recipes/recipes.types'
+import { getPantangPrimaryCtaStyle } from '#/lib/pantang-cta'
 
 const FAVORITES_KEY = 'pantang-food-start-favorites'
 
@@ -85,10 +86,7 @@ function SavedRecipesPage() {
               <Button
                 asChild
                 className="h-10 rounded-full px-5 text-sm font-medium"
-                style={{
-                  backgroundColor: 'var(--pantang-ink)',
-                  color: 'white',
-                }}
+                style={getPantangPrimaryCtaStyle()}
               >
                 <a href="#shopping-list">
                   <ShoppingBasket className="h-4 w-4" /> View shopping list
