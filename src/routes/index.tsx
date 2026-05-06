@@ -1,11 +1,10 @@
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
-import { Clock3, Flame, Plus, Search, Sparkles, Stars } from 'lucide-react'
+import { Clock3, Plus, Search, Sparkles } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import type { FormEvent, ReactNode } from 'react'
+import type { FormEvent } from 'react'
 
-import { PantangFooter, PantangHeader } from '#/components/pantang-layout'
+import { PantangHeader } from '#/components/pantang-layout'
 import { Button } from '#/components/ui/button'
-import { Badge } from '#/components/ui/badge'
 import { Input } from '#/components/ui/input'
 import {
   Select,
@@ -25,20 +24,8 @@ import {
 } from '#/components/ui/sheet'
 import { Textarea } from '#/components/ui/textarea'
 import { getPantangPrimaryCtaStyle } from '#/lib/pantang-cta'
-import { getCookpadInspirations } from '#/features/recipes/pantang-cookpad'
 import type { PantangLanguage } from '#/features/recipes/pantang-design'
-import {
-  buildPantangCalendar,
-  buildPantangFeaturedRecipes,
-  getPantangHeroCopy,
-  getPantangPantryStaples,
-  getPantangStories,
-} from '#/features/recipes/pantang-design'
-import {
-  filterRecipes,
-  getTopPantryItems,
-  splitLines,
-} from '#/features/recipes/recipes.helpers'
+import { filterRecipes, splitLines } from '#/features/recipes/recipes.helpers'
 import { createRecipe, getRecipes } from '#/features/recipes/recipes.functions'
 import type {
   CreateRecipeInput,
@@ -78,7 +65,6 @@ function Home() {
   const navigate = useNavigate()
   const [recipes, setRecipes] = useState(initialRecipes)
   const [language, setLanguage] = useState<PantangLanguage>('en')
-  const [activePhase, setActivePhase] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formError, setFormError] = useState('')
   const [showComposer, setShowComposer] = useState(false)
@@ -106,20 +92,6 @@ function Home() {
     () => filterRecipes(recipes, filters),
     [recipes, filters],
   )
-  const featuredRecipes = useMemo(
-    () => buildPantangFeaturedRecipes(recipes, 5),
-    [recipes],
-  )
-  const recoveryTimeline = useMemo(() => buildPantangCalendar(), [])
-  const pantryHighlights = useMemo(
-    () => getTopPantryItems(recipes, 6),
-    [recipes],
-  )
-  const pantryStaples = useMemo(() => getPantangPantryStaples(), [])
-  const stories = useMemo(() => getPantangStories(), [])
-  const cookpadInspirations = useMemo(() => getCookpadInspirations(3), [])
-  const copy = getPantangHeroCopy(language)
-  const heroRecipe = featuredRecipes[0] || recipes[0]
 
   async function handleCreateRecipe(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -185,199 +157,39 @@ function Home() {
 
       <main
         id="home"
-        className="mx-auto max-w-[1180px] px-4 pb-16 pt-5 sm:px-6 lg:px-8"
+        className="mx-auto max-w-[980px] px-4 pb-16 pt-5 sm:px-6 lg:px-8"
       >
-        <section className="grid gap-5 lg:grid-cols-[1.35fr_0.85fr] lg:items-stretch">
-          <div className="rounded-[2rem] border border-[var(--pantang-line)] bg-[var(--pantang-cream)] p-5 shadow-[0_24px_70px_oklch(0.205_0.018_55_/_8%)] sm:p-7 lg:p-8">
-            <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] font-[var(--font-mono)]">
-              <span>{copy.eyebrow}</span>
-              <span className="h-1 w-1 rounded-full bg-[var(--pantang-terra)]" />
-              <span>Calm cooking after birth</span>
-            </div>
-
-            <h1 className="mt-5 max-w-[13ch] text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-[0.93] tracking-[-0.055em] text-[var(--pantang-ink)]">
-              Pantang recipes for the next meal.
+        <section
+          id="recipes"
+          className="rounded-[2rem] border border-[var(--pantang-line)] bg-[var(--pantang-cream)] p-4 shadow-[0_24px_70px_oklch(0.205_0.018_55_/_8%)] sm:p-6"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h1 className="text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
+              Menu
             </h1>
-
-            <p className="mt-4 max-w-[58ch] text-[clamp(1rem,1.35vw,1.15rem)] leading-8 text-[var(--pantang-soft)]">
-              A bilingual archive for Malaysian mothers: browse by recovery
-              week, save favourites, and keep family recipes within reach.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button
-                asChild
-                className="h-10 rounded-full px-5 text-sm font-medium"
-                style={getPantangPrimaryCtaStyle()}
-              >
-                <a href="#recipes">
-                  Open recipes <span aria-hidden="true">→</span>
-                </a>
-              </Button>
+            <div className="flex flex-wrap gap-2">
               <Button
                 type="button"
                 variant="outline"
-                className="h-10 rounded-full px-5 text-sm font-medium"
+                className="h-9 rounded-full px-4 text-sm font-medium"
                 onClick={() => setShowComposer(true)}
               >
-                <Plus className="h-4 w-4" /> Add a recipe
+                <Plus className="h-4 w-4" /> Add
               </Button>
               <Button
                 asChild
                 variant="secondary"
-                className="h-10 rounded-full px-5 text-sm font-medium"
+                className="h-9 rounded-full px-4 text-sm font-medium"
               >
-                <Link to="/saved">Saved shelf</Link>
+                <Link to="/saved">Saved</Link>
               </Button>
             </div>
-
-            <div className="mt-7 flex flex-wrap gap-2">
-              <Pill>44 days</Pill>
-              <Pill>Bilingual</Pill>
-              <Pill>{recipes.length} recipes</Pill>
-              <Pill>Mobile-first</Pill>
-            </div>
           </div>
 
-          <aside className="rounded-[2rem] border border-[var(--pantang-line)] bg-[var(--pantang-warm)] p-5 sm:p-6 lg:p-7">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                  Today in the kitchen
-                </p>
-                <h2 className="mt-2 text-xl font-semibold text-[var(--pantang-ink)]">
-                  Start with one warm dish
-                </h2>
-              </div>
-              <Stars className="h-5 w-5 text-[var(--pantang-terra)]" />
-            </div>
-
-            <div className="mt-5 space-y-3">
-              <div className="border-t border-[var(--pantang-line)] py-4">
-                <p className="text-sm font-medium text-[var(--pantang-ink)]">
-                  Recommended first
-                </p>
-                <Link
-                  to="/recipes/$recipeId"
-                  params={{ recipeId: heroRecipe.id }}
-                  className="mt-2 block text-sm leading-6 text-[var(--pantang-soft)] transition hover:text-[var(--pantang-terra-deep)]"
-                >
-                  {heroRecipe.title} · {heroRecipe.prepTime}
-                </Link>
-              </div>
-
-              <div className="border-t border-[var(--pantang-line)] py-4">
-                <p className="text-sm font-medium text-[var(--pantang-ink)]">
-                  Gentle structure
-                </p>
-                <div className="mt-3 grid gap-2 text-sm text-[var(--pantang-soft)]">
-                  <div className="flex items-center justify-between">
-                    <span>Phases</span>
-                    <span className="font-medium text-[var(--pantang-ink)]">
-                      4
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Recovery span</span>
-                    <span className="font-medium text-[var(--pantang-ink)]">
-                      44 days
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Languages</span>
-                    <span className="font-medium text-[var(--pantang-ink)]">
-                      EN / BM
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-t border-[var(--pantang-line)] py-4">
-                <p className="text-sm font-medium text-[var(--pantang-ink)]">
-                  Kitchen promise
-                </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--pantang-soft)]">
-                  Warm, searchable, and spare enough to use while the baby is
-                  resting nearby.
-                </p>
-              </div>
-            </div>
-          </aside>
-        </section>
-
-        <section
-          id="calendar"
-          className="mt-8 border-t border-[var(--pantang-line)] pt-8"
-        >
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                Plan
-              </p>
-              <h2 className="mt-2 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
-                The 44-day recovery plan
-              </h2>
-            </div>
-            <p className="max-w-[44ch] text-sm leading-6 text-[var(--pantang-soft)]">
-              Tap a phase to see how the kitchen rhythm shifts from recovery to
-              warming meals and milk-supporting dishes.
-            </p>
-          </div>
-
-          <div className="mt-6 grid gap-3 md:grid-cols-4">
-            {recoveryTimeline.map((phase, index) => (
-              <button
-                key={phase.num}
-                type="button"
-                onClick={() => setActivePhase(index)}
-                className={`border-t px-4 py-4 text-left transition ${
-                  activePhase === index
-                    ? 'border-[var(--pantang-terra)] bg-[color:oklch(0.565_0.14_43_/_8%)]'
-                    : 'border-[var(--pantang-line)] hover:bg-[var(--pantang-warm)]'
-                }`}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                    Phase {phase.num}
-                  </p>
-                  <span className="text-[10px] text-[var(--pantang-muted)]">
-                    {phase.days}
-                  </span>
-                </div>
-                <p className="mt-3 text-lg font-semibold text-[var(--pantang-ink)]">
-                  {phase.name}
-                </p>
-                <p className="mt-1 text-sm leading-6 text-[var(--pantang-soft)]">
-                  {phase.bm} · {phase.days}
-                </p>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section
-          id="recipes"
-          className="mt-8 grid gap-4 lg:grid-cols-[1.25fr_0.75fr] lg:items-start"
-        >
-          <div className="border-t border-[var(--pantang-line)] pt-8">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                  Database
-                </p>
-                <h2 className="mt-2 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
-                  Cook through the archive
-                </h2>
-              </div>
-              <p className="text-sm text-[var(--pantang-soft)]">
-                {filteredRecipes.length} visible recipes
-              </p>
-            </div>
-
-            <div className="mt-6 border-t border-[var(--pantang-line)] pt-6">
-              <div className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
-                <Search className="h-4 w-4" /> Quick filter
-              </div>
+          <div className="mt-5 border-t border-[var(--pantang-line)] pt-5">
+            <label className="flex items-center gap-2 text-sm text-[var(--pantang-soft)]">
+              <Search className="h-4 w-4" />
+              <span className="sr-only">Search menu</span>
               <input
                 value={filters.query}
                 onChange={(event) =>
@@ -387,175 +199,56 @@ function Home() {
                   }))
                 }
                 placeholder="Search ginger, fish, kurma..."
-                className="mt-3 w-full rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-cream)] px-4 py-3 text-[var(--pantang-ink)] outline-none placeholder:text-[var(--pantang-muted)] focus:border-[var(--pantang-terra)]"
+                className="w-full rounded-2xl border border-[var(--pantang-line)] bg-[var(--pantang-bg)] px-4 py-3 text-[var(--pantang-ink)] outline-none placeholder:text-[var(--pantang-muted)] focus:border-[var(--pantang-terra)]"
               />
-              <div className="mt-4 grid gap-4 md:grid-cols-3">
-                <FilterRow
-                  label="Week"
-                  items={weeks}
-                  activeItem={filters.week}
-                  onPick={(week) =>
-                    setFilters((current) => ({ ...current, week }))
-                  }
-                />
-                <FilterRow
-                  label="Need"
-                  items={benefits}
-                  activeItem={filters.benefit}
-                  onPick={(benefit) =>
-                    setFilters((current) => ({ ...current, benefit }))
-                  }
-                />
-                <FilterRow
-                  label="Type"
-                  items={categories}
-                  activeItem={filters.category}
-                  onPick={(category) =>
-                    setFilters((current) => ({ ...current, category }))
-                  }
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-[var(--pantang-line)] bg-[var(--pantang-cream)]">
-              <div className="hidden grid-cols-[1.6fr_120px_140px_100px] gap-3 border-b border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] md:grid">
-                <span>Recipe</span>
-                <span>Week</span>
-                <span>Benefit</span>
-                <span>Time</span>
-              </div>
-              <div>
-                {filteredRecipes.map((recipe) => (
-                  <RecipeRow key={recipe.id} recipe={recipe} />
-                ))}
-              </div>
-            </div>
-
-            {filteredRecipes.length === 0 ? (
-              <div className="mt-4 border-t border-[var(--pantang-line)] py-5 text-sm text-[var(--pantang-soft)]">
-                No recipe matches yet. Try fewer filters or search for ginger,
-                fish, soup, or tonic.
-              </div>
-            ) : null}
-          </div>
-
-          <div className="space-y-6">
-            <div className="border-t border-[var(--pantang-line)] pt-6">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                    Pantry
-                  </p>
-                  <h3 className="mt-2 text-xl font-semibold text-[var(--pantang-ink)]">
-                    Ingredients that show up again
-                  </h3>
-                </div>
-                <Flame className="h-5 w-5 text-[var(--pantang-terra)]" />
-              </div>
-              <div className="mt-4 space-y-2">
-                {pantryHighlights.slice(0, 5).map((item) => (
-                  <div
-                    key={item.ingredient}
-                    className="flex items-center justify-between border-t border-[var(--pantang-line)] py-3 text-sm text-[var(--pantang-ink)]"
-                  >
-                    <span className="truncate pr-3">{item.ingredient}</span>
-                    <span className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.14em] text-[var(--pantang-muted)]">
-                      ×{item.count}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t border-[var(--pantang-line)] pt-6">
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                Staples
-              </p>
-              <div className="mt-4 space-y-3">
-                {pantryStaples.slice(0, 4).map((item) => (
-                  <div
-                    key={item.name}
-                    className="border-t border-[var(--pantang-line)] py-3"
-                  >
-                    <p className="text-sm font-medium text-[var(--pantang-ink)]">
-                      {item.name}
-                    </p>
-                    <p className="mt-1 text-sm leading-6 text-[var(--pantang-soft)]">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            </label>
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              <FilterRow
+                label="Week"
+                items={weeks}
+                activeItem={filters.week}
+                onPick={(week) =>
+                  setFilters((current) => ({ ...current, week }))
+                }
+              />
+              <FilterRow
+                label="Need"
+                items={benefits}
+                activeItem={filters.benefit}
+                onPick={(benefit) =>
+                  setFilters((current) => ({ ...current, benefit }))
+                }
+              />
+              <FilterRow
+                label="Type"
+                items={categories}
+                activeItem={filters.category}
+                onPick={(category) =>
+                  setFilters((current) => ({ ...current, category }))
+                }
+              />
             </div>
           </div>
-        </section>
 
-        <section className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]">
-          <div className="border-t border-[var(--pantang-line)] pt-8">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                  References
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
-                  Cookpad sources
-                </h2>
-              </div>
-              <a
-                href="https://cookpad.com/my/search/ibu%20pantang"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-[var(--pantang-line)] px-4 py-2 text-sm text-[var(--pantang-ink)] transition hover:bg-[var(--pantang-warm)]"
-              >
-                Open source
-              </a>
+          <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[var(--pantang-line)] bg-[var(--pantang-bg)]">
+            <div className="hidden grid-cols-[1.6fr_120px_140px_100px] gap-3 border-b border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-4 py-3 text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)] md:grid">
+              <span>Recipe</span>
+              <span>Week</span>
+              <span>Benefit</span>
+              <span>Time</span>
             </div>
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              {cookpadInspirations.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block border-t border-[var(--pantang-line)] py-4 transition hover:text-[var(--pantang-terra-deep)]"
-                >
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-                    {item.sourceName}
-                  </p>
-                  <h3 className="mt-2 text-base font-medium leading-6 text-[var(--pantang-ink)]">
-                    {item.title}
-                  </h3>
-                </a>
+            <div>
+              {filteredRecipes.map((recipe) => (
+                <RecipeRow key={recipe.id} recipe={recipe} />
               ))}
             </div>
           </div>
 
-          <div
-            id="stories"
-            className="border-t border-[var(--pantang-line)] pt-8"
-          >
-            <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--pantang-muted)]">
-              Notes
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[var(--pantang-ink)]">
-              Mother stories, kept short
-            </h2>
-            <div className="mt-5 space-y-3">
-              {stories.map((story) => (
-                <blockquote
-                  key={story.name}
-                  className="border-t border-[var(--pantang-line)] pt-4"
-                >
-                  <p className="text-sm leading-7 text-[var(--pantang-ink)]">
-                    “{story.quote}”
-                  </p>
-                  <footer className="mt-3 text-[11px] uppercase tracking-[0.16em] text-[var(--pantang-muted)]">
-                    {story.name} · {story.where}
-                  </footer>
-                </blockquote>
-              ))}
+          {filteredRecipes.length === 0 ? (
+            <div className="mt-4 border-t border-[var(--pantang-line)] py-5 text-sm text-[var(--pantang-soft)]">
+              No matches.
             </div>
-          </div>
+          ) : null}
         </section>
 
         <Sheet open={showComposer} onOpenChange={setShowComposer}>
@@ -716,8 +409,6 @@ function Home() {
           </SheetContent>
         </Sheet>
       </main>
-
-      <PantangFooter />
     </div>
   )
 }
@@ -765,17 +456,6 @@ function RecipeRow({ recipe }: { recipe: Recipe }) {
         <Clock3 className="h-4 w-4" /> {recipe.prepTime}
       </p>
     </Link>
-  )
-}
-
-function Pill({ children }: { children: ReactNode }) {
-  return (
-    <Badge
-      variant="outline"
-      className="rounded-full border-[var(--pantang-line)] bg-[var(--pantang-warm)] px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--pantang-muted)]"
-    >
-      {children}
-    </Badge>
   )
 }
 
